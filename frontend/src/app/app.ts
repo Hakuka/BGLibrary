@@ -1,12 +1,18 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { Games } from './game/game';
+import { Header } from './header/header';
+import { Menu } from './top-menu/menu';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Header, Menu, Games],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('frontend');
+  selectedMenuOption?: string;
+
+  onSelectMenu(option: string) {
+    this.selectedMenuOption = option;
+  }
 }

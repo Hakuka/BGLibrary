@@ -1,0 +1,17 @@
+nav {
+  background-color: #ad410f;
+  /* border-top: 1px solid white; */
+}
+nav .btn {
+  color: white;
+  border: 0;
+  border-radius: 0;
+}
+
+button:hover,
+button:active,
+.active {
+  background-color: whitesmoke;
+  color: #ad410f !important;
+  font-weight: bold;
+}

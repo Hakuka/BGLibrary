@@ -5,3 +5,8 @@
   text-align: center;
   color: #ad410f;
 }
+
+.games-list {
+  max-height: calc(100vh - 115px);
+  overflow-y: auto;
+}

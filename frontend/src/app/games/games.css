@@ -1,0 +1,15 @@
+.btn {
+  justify-content: center;
+  width: 100%;
+  background-color: color-mix(in srgb, #ad410f 80%, white 40%);
+  font-weight: bold;
+  margin-top: 1px;
+}
+
+button:hover,
+button:active,
+.active {
+  background-color: whitesmoke;
+  color: #ad410f !important;
+  font-weight: bold;
+}

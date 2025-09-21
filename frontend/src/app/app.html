@@ -1,19 +1,28 @@
 <app-header />
 <app-menu (select)="onSelectMenu($event)" />
 <main>
-  @if (selectedMenuOption==="menu1"){
-  <nav>
-    <div class="container-fluid px-0">
-      <div class="row">
-        <div class="col-3 px-0 d-flex flex-column">
-          <app-game />
-        </div>
+  @if (selectedMenuOption==="menu1") {
+  <div class="container-fluid px-0">
+    <div class="row">
+      <!-- list of games -->
+      <div class="col-2 px-0 d-flex flex-column games-list">
+        @for (game of sortedGames; track game.id) {
+        <li>
+          <app-game [game]="game" (selectedGame)="onSelectGame($event)" />
+        </li>
+        }
+      </div>
+
+      <!-- selected game -->
+      <div class="col bg-light">
+        @if (selectedGame) {
+        <p>selected game: {{ selectedGame.name }}</p>
+        }
       </div>
     </div>
-    <div class="col bg-light"></div>
-  </nav>
-  } @else if (selectedMenuOption ==="menu2") {
-  <p>działa menu 2</p>
+  </div>
+  } @else if (selectedMenuOption === "menu2" || selectedMenuOption === "menu3") {
+  <p>TO DO (in future)</p>
   } @else {
   <p id="fallback">Welcome, select an option at the top to get started :)</p>
   }

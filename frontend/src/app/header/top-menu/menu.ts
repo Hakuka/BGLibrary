@@ -9,7 +9,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class Menu {
   @Output() select = new EventEmitter<string>();
 
+  selectedMenu: string | undefined;
+
   onSelect(option: string) {
     this.select.emit(option);
+    this.selectedMenu = option;
   }
 }

@@ -11,7 +11,7 @@ nav .btn {
 button:hover,
 button:active,
 .active {
-  background-color: whitesmoke;
-  color: #ad410f !important;
+  background-color: color-mix(in srgb, #ad410f 80%, white 15%);
+  color: white !important;
   font-weight: bold;
 }

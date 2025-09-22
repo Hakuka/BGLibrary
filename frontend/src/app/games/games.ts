@@ -10,6 +10,7 @@ import { type Game } from './game.model';
 })
 export class Games {
   @Input({ required: true }) game!: Game;
+  @Input({ required: true }) isSelected!: boolean;
   @Output() selectedGame = new EventEmitter<string>();
 
   onSelectGame() {

@@ -26,9 +26,7 @@
 
       <!-- selected game -->
       <div class="col">
-        @if (selectedGame) {
-        <p>selected game: {{ selectedGame.name }}</p>
-        }
+        <game-view [selectedGame]="selectedGame" />
       </div>
     </div>
   </div>

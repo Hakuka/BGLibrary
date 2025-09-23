@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { type Game } from './game.model';
+import { type Game } from '../../shared/models/game.model';
 
 @Component({
   selector: 'app-game',

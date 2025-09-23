@@ -1,0 +1,45 @@
+@if(selectedGame){
+<div class="col-6 mx-auto">
+  <h2 class="text-center mb-3 fw-bold">{{ selectedGame.name }}</h2>
+  <table class="table table-sm">
+    <tbody>
+      <tr>
+        <th scope="row"><i class="bi bi-people me-2"></i> Number of players</th>
+        <td>{{ selectedGame.numberOfPlayers }}</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="bi bi-alarm me-2"></i>Playing time</th>
+        <td>{{ selectedGame.playingTime }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Weight</th>
+        <td>{{ selectedGame.weight }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Min. age</th>
+        <td>{{ selectedGame.minAge }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Designer</th>
+        <td>{{ selectedGame.designer }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Artist</th>
+        <td>{{ selectedGame.artist }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Description</th>
+        <td>{{ selectedGame.shortDescription }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Comment</th>
+        <td>{{ selectedGame.comment }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-sm">
+    <h4 class="text-center mb-3">Owned copies</h4>
+  </table>
+</div>
+} @else {}

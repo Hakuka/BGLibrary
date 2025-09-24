@@ -6,7 +6,7 @@
   color: #ad410f;
 }
 .left-menu {
-  max-height: calc(100vh - 115px);
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
   padding-left: 5px;
   padding-right: 5px;

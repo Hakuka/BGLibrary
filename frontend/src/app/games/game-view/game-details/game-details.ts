@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
-
+import { Component, Input } from '@angular/core';
+import { type Game } from '../../../shared/models/game.model';
 @Component({
-  selector: 'app-game-details',
+  selector: 'game-details',
   imports: [],
   templateUrl: './game-details.html',
   styleUrl: './game-details.css',
 })
-export class GameDetails {}
+export class GameDetails {
+  @Input({ required: true }) selectedGame: Game | undefined;
+}

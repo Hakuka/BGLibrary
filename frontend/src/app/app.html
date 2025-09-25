@@ -1,7 +1,7 @@
 ﻿<app-header />
 <app-menu (select)="onSelectMenu($event)" />
 <main>
-  @if (selectedMenuOption==="menu1") {
+  @if (selectedMenuOption === "menu1") {
   <div class="container-fluid">
     <div class="row">
       <!-- left menu -->
@@ -31,9 +31,11 @@
       </div>
     </div>
   </div>
-  } @else if (selectedMenuOption === "menu2" || selectedMenuOption === "menu3") {
-  <p>TO DO (in future)</p>
-  } @else {
+  } @else if (selectedMenuOption === "menu2") {
+  <borrowed-view />
+  } @else if (selectedMenuOption === "menu3") {
+  <p>to do</p>
+  }@else {
   <p id="fallback">Welcome, select an option at the top to get started :)</p>
   }
 </main>

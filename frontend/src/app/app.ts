@@ -2,14 +2,15 @@
 import { FormsModule } from '@angular/forms';
 import { dummy_games } from '../assets/dummy-games';
 import { BorrowedView } from './borrowed/borrowed-view';
-import { GameView } from './games/game-view/game-view';
+import { CopiesDetails } from './games/game-view/copies-details';
+import { GameDetails } from './games/game-view/game-details';
 import { Games } from './games/left-menu/games';
 import { Header } from './header/header';
-import { Menu } from './header/top-menu/menu';
+import { Menu } from './header/menu';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Menu, Games, FormsModule, GameView, BorrowedView],
+  imports: [Header, Menu, Games, FormsModule, BorrowedView, GameDetails, CopiesDetails],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

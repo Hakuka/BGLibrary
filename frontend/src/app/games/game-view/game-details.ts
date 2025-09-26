@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { type Game } from '../../../shared/models/game.model';
+import { type Game } from '../../shared/models/game.model';
 @Component({
   selector: 'game-details',
   imports: [],

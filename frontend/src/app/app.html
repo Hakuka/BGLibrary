@@ -27,7 +27,10 @@
       <!-- selected game -->
       <div class="col">
         <h2 class="text-center mb-3 fw-bold sticky-top bg-body">{{ selectedGame?.name }}</h2>
-        <game-view [selectedGame]="selectedGame" />
+        <div class="game-table">
+          <game-details [selectedGame]="selectedGame" />
+          <copies-details [selectedGame]="selectedGame" />
+        </div>
       </div>
     </div>
   </div>

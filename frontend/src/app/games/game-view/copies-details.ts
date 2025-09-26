@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { dummy_copies } from '../../../../assets/dummy-copies';
-import { type Game } from '../../../shared/models/game.model';
+import { dummy_copies } from '../../../assets/dummy-copies';
+import { type Game } from '../../shared/models/game.model';
 
 @Component({
   selector: 'copies-details',

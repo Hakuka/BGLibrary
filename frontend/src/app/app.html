@@ -5,31 +5,13 @@
   <div class="container-fluid">
     <div class="row">
       <!-- left menu -->
-      <nav class="col-2 left-menu">
-        <!-- sticky search -->
-        <div class="sticky-top bg-body pt-1 pb-1">
-          <input class="form-control" placeholder="Search" [(ngModel)]="searchGame" />
-        </div>
-        <!-- list of games -->
-        <ul class="nav nav-pills flex-column">
-          @for (game of sortedGames; track game.id) {
-          <li>
-            <app-game
-              [game]="game"
-              (selectedGame)="onSelectGame($event)"
-              [isSelected]="selectedGameId === game.id"
-            />
-          </li>
-          }
-        </ul>
-      </nav>
-
+      <app-game class="col-2" (selectedGame)="onSelectedGame($event)" />
       <!-- selected game -->
       <div class="col">
-        <h2 class="text-center mb-3 fw-bold sticky-top bg-body">{{ selectedGame?.name }}</h2>
+        <h2 class="text-center mb-3 fw-bold sticky-top bg-body">{{ currentGame?.name }}</h2>
         <div class="game-table">
-          <game-details [selectedGame]="selectedGame" />
-          <copies-details [selectedGame]="selectedGame" />
+          <game-details [selectedGame]="currentGame" />
+          <copies-details [selectedGame]="currentGame" />
         </div>
       </div>
     </div>

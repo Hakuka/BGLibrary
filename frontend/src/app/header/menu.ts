@@ -6,7 +6,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: './menu.html',
   styleUrl: './menu.css',
 })
-export class Menu {
+export class MenuComponent {
   @Output() select = new EventEmitter<string>();
 
   selectedMenu: string | undefined;

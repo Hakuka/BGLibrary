@@ -19,8 +19,6 @@ Once the server is running, open your browser and navigate to `http://localhost:
 ### TO DO
 
 - finish project :)
-- create service with game instead of moving to multiple deep levels
 - create base url for models and others instead of ../../..
 - probably rewrite everything to actually use bootstrap...
 - set global-height or change idea to another display - now looks weird...
-- move sticky search to left menu (integrate whole games/left menu into 1 place)

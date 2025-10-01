@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { dummy_copies } from '../../../assets/dummy-copies';
+import { Component, Input, inject } from '@angular/core';
 import { type Game } from '../../shared/models/game.model';
+import { CopiesService } from '../../shared/services/copies.service';
 
 @Component({
   selector: 'copies-details',
@@ -8,12 +8,13 @@ import { type Game } from '../../shared/models/game.model';
   templateUrl: './copies-details.html',
   styleUrl: './copies-details.css',
 })
-export class CopiesDetails {
+export class CopiesDetailsComponent {
+  private copiesService = inject(CopiesService);
   @Input({ required: true }) selectedGame: Game | undefined;
-  listOfCopies = dummy_copies;
 
   get selectedGameCopies() {
-    return this.listOfCopies
+    return this.copiesService
+      .getAllCopies()
       .filter((copy) => copy.gameId === this.selectedGame?.id)
       .sort((a, b) => a.borrowed.localeCompare(b.borrowed));
   }

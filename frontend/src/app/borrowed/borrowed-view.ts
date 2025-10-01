@@ -9,7 +9,7 @@ import { dummy_games } from '../../assets/dummy-games';
   templateUrl: './borrowed-view.html',
   styleUrl: './borrowed-view.css',
 })
-export class BorrowedView {
+export class BorrowedViewComponent {
   searchGame = '';
   searchPerson = '';
   listOfCopies = dummy_copies;

@@ -8,7 +8,7 @@ import { type Game } from '../../shared/models/game.model';
   templateUrl: './copies-details.html',
   styleUrl: './copies-details.css',
 })
-export class CopiesDetails {
+export class CopiesDetailsComponent {
   @Input({ required: true }) selectedGame: Game | undefined;
   listOfCopies = dummy_copies;
 

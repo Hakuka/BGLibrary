@@ -1,43 +1,38 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { dummy_games } from '../assets/dummy-games';
-import { BorrowedView } from './borrowed/borrowed-view';
-import { CopiesDetails } from './games/game-view/copies-details';
-import { GameDetails } from './games/game-view/game-details';
-import { Games } from './games/left-menu/games';
-import { Header } from './header/header';
-import { Menu } from './header/menu';
+import { BorrowedViewComponent } from './borrowed/borrowed-view';
+import { CopiesDetailsComponent } from './games/game-view/copies-details';
+import { GameDetailsComponent } from './games/game-view/game-details';
+import { GamesComponent } from './games/left-menu/games';
+import { HeaderComponent } from './header/header';
+import { MenuComponent } from './header/menu';
+import { Game } from './shared/models/game.model';
+import { GamesService } from './shared/services/games.service';
 
 @Component({
   selector: 'app-root',
-  imports: [Header, Menu, Games, FormsModule, BorrowedView, GameDetails, CopiesDetails],
+  imports: [
+    HeaderComponent,
+    MenuComponent,
+    GamesComponent,
+    FormsModule,
+    BorrowedViewComponent,
+    GameDetailsComponent,
+    CopiesDetailsComponent,
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
+  currentGame: Game | undefined;
   selectedMenuOption?: string;
-  listOfGames = dummy_games;
-  selectedGameId: string | undefined;
-  searchGame = '';
+  private gamesService = inject(GamesService);
+
+  onSelectedGame(id: string) {
+    return (this.currentGame = this.gamesService.selectedGame(id));
+  }
 
   onSelectMenu(option: string) {
     this.selectedMenuOption = option;
-  }
-
-  get sortedGames() {
-    return [...this.searchForGames].sort((a, b) => a.name.localeCompare(b.name));
-  }
-
-  onSelectGame(id: string) {
-    this.selectedGameId = id;
-  }
-
-  get selectedGame() {
-    return this.listOfGames.find((games) => games.id === this.selectedGameId);
-  }
-
-  get searchForGames() {
-    const term = this.searchGame.trim().toLowerCase();
-    return this.listOfGames.filter((g) => (term ? g.name.toLowerCase().includes(term) : true));
   }
 }

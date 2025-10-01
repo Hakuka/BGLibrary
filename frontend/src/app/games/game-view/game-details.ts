@@ -6,6 +6,6 @@ import { type Game } from '../../shared/models/game.model';
   templateUrl: './game-details.html',
   styleUrl: './game-details.css',
 })
-export class GameDetails {
+export class GameDetailsComponent {
   @Input({ required: true }) selectedGame: Game | undefined;
 }

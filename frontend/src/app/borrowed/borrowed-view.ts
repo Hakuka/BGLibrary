@@ -2,32 +2,38 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CopiesService } from '../shared/services/copies.service';
 import { GamesService } from '../shared/services/games.service';
+import { BorrowedAddComponent } from './borrowed-add/borrowed-add';
+import { BorrowedEditComponent } from './borrowed-edit/borrowed-edit';
 
 @Component({
   selector: 'borrowed-view',
-  imports: [FormsModule],
+  imports: [FormsModule, BorrowedAddComponent, BorrowedEditComponent],
   templateUrl: './borrowed-view.html',
   styleUrl: './borrowed-view.css',
 })
 export class BorrowedViewComponent {
-  constructor(private copiesService: CopiesService) {}
+  private copiesService = inject(CopiesService);
   private gamesService = inject(GamesService);
-  searchGame = '';
-  searchPerson = '';
+  isBorrowingGame = false;
+  isEditingGame = false;
+  searchGame: string = '';
+  searchPerson: string = '';
+  editingCopyId: string = '';
 
   get filteredCopies() {
     const termGame = this.searchGame.trim().toLowerCase();
     const termPerson = this.searchPerson.trim().toLowerCase();
 
-    return this.copiesService.getAllCopies().filter((copy) => {
-      if (copy.borrowed !== 'Y') return false;
+    const games = this.gamesService.getAllGames();
+    const gameById = new Map(games.map((g) => [g.id, g] as const));
 
-      const game = this.gamesService.getAllGames().find((g) => g.id === copy.gameId);
+    return this.copiesService.getAllBorrowedCopies().filter((copy) => {
+      const game = gameById.get(copy.gameId);
       if (!game) return false;
 
       const matchesGame = !termGame || game.name.toLowerCase().includes(termGame);
-      const matchesPerson =
-        !termPerson || copy.responsiblePerson?.toLowerCase().includes(termPerson);
+      const person = copy.responsiblePerson?.toLowerCase() ?? '';
+      const matchesPerson = !termPerson || person.includes(termPerson);
 
       return matchesGame && matchesPerson;
     });
@@ -36,5 +42,20 @@ export class BorrowedViewComponent {
   gameNameById(gameId: string): string {
     const game = this.gamesService.getAllGames().find((g) => g.id === gameId);
     return game ? game.name : '(unknown)';
+  }
+  onStartBorrowingGame() {
+    this.isBorrowingGame = true;
+  }
+
+  onCloseBorrowingGame() {
+    this.isBorrowingGame = false;
+  }
+  onEditBorrowedGame(copyId: string) {
+    this.editingCopyId = copyId;
+    this.isEditingGame = true;
+  }
+
+  onCloseEditBorrowedGame() {
+    this.isEditingGame = false;
   }
 }

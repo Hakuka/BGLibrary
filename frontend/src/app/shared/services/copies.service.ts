@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { type Copy } from '../models/copy.model';
 
 @Injectable({ providedIn: 'root' })
 export class CopiesService {
-  private dummy_copies = [
+  private dummy_copies: Copy[] = [
     {
       id: 'c1',
       gameId: 'g1',
@@ -172,7 +173,40 @@ export class CopiesService {
     },
   ];
 
+  constructor() {
+    const dummy_copies = localStorage.getItem('dummy_copies');
+
+    if (dummy_copies) {
+      this.dummy_copies = JSON.parse(dummy_copies);
+    }
+  }
+
   getAllCopies() {
     return this.dummy_copies;
+  }
+
+  getAllBorrowedCopies() {
+    return this.dummy_copies.filter((c) => c.borrowed === 'Y');
+  }
+
+  getCopyInfo(copyId: string): Copy {
+    const copy = this.dummy_copies.find((e) => e.id === copyId);
+    if (!copy) {
+      throw new Error(`Copy not found for id =${copyId}`);
+    }
+
+    return copy;
+  }
+
+  borrowCopy(borrowCopyData: Copy) {
+    const index = this.dummy_copies.findIndex((c) => c.id === borrowCopyData.id);
+    if (index !== -1) {
+      this.dummy_copies[index] = { ...this.dummy_copies[index], ...borrowCopyData };
+    }
+    this.saveCopies();
+  }
+
+  private saveCopies() {
+    localStorage.setItem('dummy_copies', JSON.stringify(this.dummy_copies));
   }
 }

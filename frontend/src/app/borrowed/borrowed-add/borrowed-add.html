@@ -1,0 +1,64 @@
+<div class="backdrop" (click)="onCancel()"></div>
+<dialog open>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+      <label for="Game">Game *</label>
+      <select
+        id="Game"
+        name="Game"
+        [(ngModel)]="enteredGame"
+        (ngModelChange)="onGameChange()"
+        required
+      >
+        @for (game of games; track game.id){
+        <option [value]="game.id">{{ game.name }}</option>
+        }
+      </select>
+    </p>
+
+    <!-- only copies from selected game-->
+    <p>
+      <label for="Copy">Copy *</label>
+      <select
+        id="Copy"
+        name="Copy"
+        [(ngModel)]="enteredCopy"
+        (ngModelChange)="onCopyChange($event)"
+        required
+        [disabled]="!enteredGame"
+      >
+        @for (copy of copies; track copy.id){ @if (copy.gameId === enteredGame &&
+        copy.borrowed==='N') {
+        <option [value]="copy.id">{{ copy.id }}</option>
+        } }
+      </select>
+    </p>
+
+    <p>
+      <label for="Person">Responsible Person</label>
+      <input type="text" id="Person" name="Person" [(ngModel)]="enteredResponsiblePerson" />
+    </p>
+
+    <p>
+      <label for="Weight">Weight *</label>
+      <input
+        type="number"
+        step="0.01"
+        id="Weight"
+        name="Weight"
+        [(ngModel)]="enteredWeight"
+        required
+      />
+    </p>
+
+    <p>
+      <label for="Comment">Comment</label>
+      <textarea id="Comment" name="Comment" [(ngModel)]="enteredComment"></textarea>
+    </p>
+
+    <p class="actions">
+      <button type="button" (click)="onCancel()">Cancel</button>
+      <button type="submit" [disabled]="f.invalid || !enteredGame || !enteredCopy">Borrow</button>
+    </p>
+  </form>
+</dialog>

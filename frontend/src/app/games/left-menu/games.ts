@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { GamesService } from '../../shared/services/games.service';
 
@@ -9,7 +9,7 @@ import { GamesService } from '../../shared/services/games.service';
   styleUrl: './games.css',
 })
 export class GamesComponent {
-  constructor(private gamesService: GamesService) {}
+  private gamesService = inject(GamesService);
   @Output() selectedGame = new EventEmitter<string>();
   gameSearchValue = '';
   selectedGameId: string | undefined;

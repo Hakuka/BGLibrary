@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Game } from '../models/game.model';
 
 @Injectable({ providedIn: 'root' })
 export class GamesService {
@@ -480,12 +481,13 @@ export class GamesService {
   sortedGames(gameSearchValue: string) {
     return [...this.searchForGames(gameSearchValue)].sort((a, b) => a.name.localeCompare(b.name));
   }
+
   searchForGames(gameSearchValue: string) {
     const term = gameSearchValue.trim().toLowerCase();
     return this.dummy_games.filter((g) => (term ? g.name.toLowerCase().includes(term) : true));
   }
 
-  selectedGame(selectedGameId: string) {
+  selectedGame(selectedGameId: string): Game | undefined {
     return this.dummy_games.find((games) => games.id === selectedGameId);
   }
 }

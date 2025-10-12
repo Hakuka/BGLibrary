@@ -1,0 +1,20 @@
+<div class="backdrop" (click)="onCancel()"></div>
+<dialog open>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    @if (removeTypeDisplay === 'C'){
+    <p>
+      <label for="Copy">Copy *</label>
+      <select id="Copy" required></select>
+    </p>
+    } @else if (removeTypeDisplay === 'G') {
+    <p>
+      <label for="Game">Game *</label>
+      <select id="Game" required></select>
+    </p>
+    }
+    <p class="actions">
+      <button type="button" (click)="onCancel()">Cancel</button>
+      <button type="submit" [disabled]="f.invalid">Remove</button>
+    </p>
+  </form>
+</dialog>

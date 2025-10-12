@@ -28,7 +28,7 @@ export class BorrowedAddComponent {
   }
 
   onSubmit() {
-    this.copiesService.borrowCopy({
+    this.copiesService.updateCopy({
       id: this.enteredCopy,
       gameId: this.enteredGame,
       weight: this.enteredWeight!,

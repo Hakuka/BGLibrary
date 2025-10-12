@@ -198,10 +198,10 @@ export class CopiesService {
     return copy;
   }
 
-  borrowCopy(borrowCopyData: Copy) {
-    const index = this.dummy_copies.findIndex((c) => c.id === borrowCopyData.id);
+  updateCopy(updateCopyData: Copy) {
+    const index = this.dummy_copies.findIndex((c) => c.id === updateCopyData.id);
     if (index !== -1) {
-      this.dummy_copies[index] = { ...this.dummy_copies[index], ...borrowCopyData };
+      this.dummy_copies[index] = { ...this.dummy_copies[index], ...updateCopyData };
     }
     this.saveCopies();
   }

@@ -6,6 +6,7 @@ import { GameDetailsComponent } from './games/game-view/game-details';
 import { GamesComponent } from './games/left-menu/games';
 import { HeaderComponent } from './header/header';
 import { MenuComponent } from './header/menu';
+import { MenageComponent } from './menage/menage';
 import { Game } from './shared/models/game.model';
 import { GamesService } from './shared/services/games.service';
 
@@ -19,6 +20,7 @@ import { GamesService } from './shared/services/games.service';
     BorrowedViewComponent,
     GameDetailsComponent,
     CopiesDetailsComponent,
+    MenageComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',

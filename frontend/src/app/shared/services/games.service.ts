@@ -474,10 +474,25 @@ export class GamesService {
       comment: 'Atmospheric and tense, strongly narrative-driven.',
     },
   ];
+  constructor() {
+    const dummy_games = localStorage.getItem('dummy_games');
 
+    if (dummy_games) {
+      this.dummy_games = JSON.parse(dummy_games);
+    }
+  }
   getAllGames() {
     return this.dummy_games;
   }
+  getGameInfo(gameId: string): Game {
+    const copy = this.dummy_games.find((e) => e.id === gameId);
+    if (!copy) {
+      throw new Error(`Copy not found for id =${gameId}`);
+    }
+
+    return copy;
+  }
+
   sortedGames(gameSearchValue: string) {
     return [...this.searchForGames(gameSearchValue)].sort((a, b) => a.name.localeCompare(b.name));
   }
@@ -489,5 +504,31 @@ export class GamesService {
 
   selectedGame(selectedGameId: string): Game | undefined {
     return this.dummy_games.find((games) => games.id === selectedGameId);
+  }
+
+  updateGame(updateGameData: Game) {
+    const index = this.dummy_games.findIndex((c) => c.id === updateGameData.id);
+    if (index !== -1) {
+      this.dummy_games[index] = { ...this.dummy_games[index], ...updateGameData };
+    }
+    this.saveGames();
+  }
+
+  removeGameById(gameId: string): void {
+    this.dummy_games = this.dummy_games.filter((g) => g.id !== gameId);
+    this.saveGames();
+  }
+  addGame(newGame: Game) {
+    const exists = this.dummy_games.some((c) => c.id === newGame.id);
+    if (exists) {
+      return false;
+    }
+    this.dummy_games.push({ ...newGame });
+    this.saveGames;
+    return true;
+  }
+
+  private saveGames() {
+    localStorage.setItem('dummy_games', JSON.stringify(this.dummy_games));
   }
 }

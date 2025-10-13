@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CopiesService } from '../../shared/services/copies.service';
+import { GamesService } from '../../shared/services/games.service';
+
 @Component({
   selector: 'remove-item',
   imports: [FormsModule],
@@ -9,12 +12,25 @@ import { FormsModule } from '@angular/forms';
 export class RemoveItem {
   @Output() close = new EventEmitter<void>();
   @Input({ required: true }) removeTypeDisplay: string | undefined;
+  private copiesService = inject(CopiesService);
+  private gamesService = inject(GamesService);
+  selectedItemId: string = '';
+  copies = this.copiesService.getAllCopies();
+  games = this.gamesService.getAllGames();
+
   onCancel() {
+    this.selectedItemId = '';
     this.close.emit();
   }
 
   onSubmit() {
-    //todo
+    if (this.removeTypeDisplay === 'C') {
+      this.copiesService.removeCopyById(this.selectedItemId);
+    } else if (this.removeTypeDisplay === 'G') {
+      this.gamesService.removeGameById(this.selectedItemId);
+      this.copiesService.removeCopyByGameId(this.selectedItemId);
+    }
+    this.selectedItemId = '';
     this.close.emit();
   }
 }

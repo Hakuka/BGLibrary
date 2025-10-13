@@ -29,9 +29,9 @@
 
   @if (isRemoving){
   <remove-item [removeTypeDisplay]="itemType" (close)="onClose()"></remove-item>
-  } else @if (isAdding){
+  } @if (isAdding){
   <add-new-item [addTypeDisplay]="itemType" (close)="onClose()"></add-new-item>
-  } else @if (isEditing){
+  } @if (isEditing){
   <edit-item [editTypeDisplay]="itemType" (close)="onClose()"></edit-item>
   }
 </div>

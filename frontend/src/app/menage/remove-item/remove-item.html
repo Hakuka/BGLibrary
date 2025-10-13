@@ -4,12 +4,23 @@
     @if (removeTypeDisplay === 'C'){
     <p>
       <label for="Copy">Copy *</label>
-      <select id="Copy" required></select>
+      <select id="Copy" name="Copy" required [(ngModel)]="selectedItemId">
+        <option disabled selected value="">Select a copy to remove</option>
+        @for (copy of copies; track copy.id) {
+        <option [value]="copy.id">{{ copy.id }}</option>
+        }
+      </select>
     </p>
     } @else if (removeTypeDisplay === 'G') {
     <p>
       <label for="Game">Game *</label>
-      <select id="Game" required></select>
+      <select id="Game" name="Game" required [(ngModel)]="selectedItemId">
+        <option disabled selected value="">Select a game to remove</option>
+        @for (game of games; track game.id) {
+        <option [value]="game.id">{{ game.name }}</option>
+        }
+      </select>
+      THIS WILL ALSO DELETE ALL COPIES OF THE DELETED GAME
     </p>
     }
     <p class="actions">

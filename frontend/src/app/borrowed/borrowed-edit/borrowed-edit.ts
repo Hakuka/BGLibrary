@@ -31,13 +31,24 @@ export class BorrowedEditComponent {
   }
 
   onSubmit() {
-    this.copiesService.borrowCopy({
+    this.copiesService.updateCopy({
       id: this.displayedCopy.id,
       gameId: this.displayedCopy.gameId,
       weight: this.editedDisplayedCopy.weight!,
       comment: this.editedDisplayedCopy.comment,
       borrowed: 'Y',
       responsiblePerson: this.editedDisplayedCopy.responsiblePerson,
+    });
+    this.close.emit();
+  }
+  onReturn() {
+    this.copiesService.updateCopy({
+      id: this.displayedCopy.id,
+      gameId: this.displayedCopy.gameId,
+      weight: this.editedDisplayedCopy.weight!,
+      comment: this.editedDisplayedCopy.comment,
+      borrowed: 'N',
+      responsiblePerson: '',
     });
     this.close.emit();
   }

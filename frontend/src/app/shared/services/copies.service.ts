@@ -198,15 +198,35 @@ export class CopiesService {
     return copy;
   }
 
-  borrowCopy(borrowCopyData: Copy) {
-    const index = this.dummy_copies.findIndex((c) => c.id === borrowCopyData.id);
+  updateCopy(updateCopyData: Copy) {
+    const index = this.dummy_copies.findIndex((c) => c.id === updateCopyData.id);
     if (index !== -1) {
-      this.dummy_copies[index] = { ...this.dummy_copies[index], ...borrowCopyData };
+      this.dummy_copies[index] = { ...this.dummy_copies[index], ...updateCopyData };
     }
+    this.saveCopies();
+  }
+
+  removeCopyById(copyId: string): void {
+    this.dummy_copies = this.dummy_copies.filter((c) => c.id !== copyId);
+    this.saveCopies();
+  }
+
+  removeCopyByGameId(gameId: string): void {
+    this.dummy_copies = this.dummy_copies.filter((c) => c.gameId !== gameId);
     this.saveCopies();
   }
 
   private saveCopies() {
     localStorage.setItem('dummy_copies', JSON.stringify(this.dummy_copies));
+  }
+
+  addCopy(newCopy: Copy) {
+    const exists = this.dummy_copies.some((c) => c.id === newCopy.id);
+    if (exists) {
+      return false;
+    }
+    this.dummy_copies.push({ ...newCopy });
+    this.saveCopies;
+    return true;
   }
 }

@@ -58,4 +58,16 @@ export class BorrowedViewComponent {
   onCloseEditBorrowedGame() {
     this.isEditingGame = false;
   }
+
+  returnBorrowedGame(copyId: string) {
+    const tempCopy = this.copiesService.getCopyInfo(copyId);
+    this.copiesService.updateCopy({
+      id: tempCopy.id,
+      gameId: tempCopy.gameId,
+      weight: tempCopy.weight!,
+      comment: tempCopy.comment,
+      borrowed: 'N',
+      responsiblePerson: '',
+    });
+  }
 }

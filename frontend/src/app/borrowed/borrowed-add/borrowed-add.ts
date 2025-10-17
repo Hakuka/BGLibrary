@@ -15,10 +15,10 @@ export class BorrowedAddComponent {
   private copiesService = inject(CopiesService);
 
   enteredGame!: string;
-  enteredCopy!: string;
-  enteredResponsiblePerson: string = '';
+  enteredCopy?: string;
   enteredWeight?: number;
-  enteredComment: string = '';
+  enteredResponsiblePerson?: string;
+  enteredComment?: string;
 
   games = this.gamesService.getAllGames();
   copies = this.copiesService.getAllCopies();
@@ -28,6 +28,10 @@ export class BorrowedAddComponent {
   }
 
   onSubmit() {
+    if (!this.enteredGame || !this.enteredCopy || !this.enteredWeight) {
+      //TODO: add banner error handling
+      return;
+    }
     this.copiesService.updateCopy({
       id: this.enteredCopy,
       gameId: this.enteredGame,
@@ -40,8 +44,8 @@ export class BorrowedAddComponent {
   }
 
   onGameChange() {
-    this.enteredCopy = '';
-    this.enteredComment = '';
+    this.enteredCopy = undefined;
+    this.enteredComment = undefined;
     this.enteredWeight = undefined;
   }
 

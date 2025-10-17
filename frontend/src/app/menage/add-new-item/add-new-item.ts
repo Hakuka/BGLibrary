@@ -10,7 +10,7 @@ import { GamesService } from '../../shared/services/games.service';
   templateUrl: './add-new-item.html',
   styleUrl: './add-new-item.css',
 })
-export class AddNewItem {
+export class AddNewItemComponent {
   @Output() close = new EventEmitter<void>();
   @Input({ required: true }) addTypeDisplay: string | undefined;
   private gamesService = inject(GamesService);

@@ -15,7 +15,8 @@ export class GamesComponent {
   selectedGameId: string | undefined;
 
   sortedGames(gameSearchValue: string) {
-    return this.gamesService.sortedGames(gameSearchValue);
+    const temp = this.gamesService.searchForGames(gameSearchValue);
+    return [...temp].sort((a, b) => a.name.localeCompare(b.name));
   }
   onSelectGame(id: string) {
     this.selectedGameId = id;

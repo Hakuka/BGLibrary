@@ -12,28 +12,34 @@ import { GamesService } from '../../shared/services/games.service';
 })
 export class EditItemComponent {
   @Output() close = new EventEmitter<void>();
-  @Input({ required: true }) editTypeDisplay: string | undefined;
+  @Input({ required: true }) editTypeDisplay!: string;
   private gamesService = inject(GamesService);
   private copiesService = inject(CopiesService);
   game: Game | undefined;
   games = this.gamesService.getAllGames();
   copies = this.copiesService.getAllCopies();
-  errorMessage = '';
-  updateCopy: Copy = {
+  updateCopy: Pick<Copy, 'id' | 'comment' | 'weight'> = {
     id: '',
-    responsiblePerson: '',
     comment: '',
-    gameId: '',
     weight: 0,
-    borrowed: 'N',
   };
-  updateGame: Game = {
+  updateGame: Pick<
+    Game,
+    | 'id'
+    | 'artist'
+    | 'comment'
+    | 'designer'
+    | 'minAge'
+    | 'numberOfPlayers'
+    | 'playingTime'
+    | 'shortDescription'
+    | 'weight'
+  > = {
+    id: '',
     artist: '',
     comment: '',
     designer: '',
-    id: '',
     minAge: 0,
-    name: '',
     numberOfPlayers: '',
     playingTime: '',
     shortDescription: '',

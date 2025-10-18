@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { AddNewItem } from './add-new-item/add-new-item';
+import { AddNewItemComponent } from './add-new-item/add-new-item';
 import { EditItemComponent } from './edit-item/edit-item';
-import { RemoveItem } from './remove-item/remove-item';
+import { RemoveItemComponent } from './remove-item/remove-item';
 
 @Component({
   selector: 'menage',
-  imports: [RemoveItem, AddNewItem, EditItemComponent],
+  imports: [RemoveItemComponent, AddNewItemComponent, EditItemComponent],
   templateUrl: './menage.html',
   styleUrl: './menage.css',
 })

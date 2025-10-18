@@ -9,9 +9,9 @@ import { GamesService } from '../../shared/services/games.service';
   templateUrl: './remove-item.html',
   styleUrl: './remove-item.css',
 })
-export class RemoveItem {
+export class RemoveItemComponent {
   @Output() close = new EventEmitter<void>();
-  @Input({ required: true }) removeTypeDisplay: string | undefined;
+  @Input({ required: true }) removeTypeDisplay!: string;
   private copiesService = inject(CopiesService);
   private gamesService = inject(GamesService);
   selectedItemId: string = '';

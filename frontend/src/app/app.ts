@@ -31,7 +31,7 @@ export class App {
   private gamesService = inject(GamesService);
 
   onSelectedGame(id: string) {
-    return (this.currentGame = this.gamesService.selectedGame(id));
+    return (this.currentGame = this.gamesService.selectedGameById(id));
   }
 
   onSelectMenu(option: string) {

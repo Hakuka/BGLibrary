@@ -3,7 +3,7 @@ import { Game } from '../models/game.model';
 
 @Injectable({ providedIn: 'root' })
 export class GamesService {
-  private dummy_games = [
+  private dummy_games: Game[] = [
     {
       id: 'g1',
       name: 'Catan',
@@ -484,17 +484,13 @@ export class GamesService {
   getAllGames() {
     return this.dummy_games;
   }
+
   getGameInfo(gameId: string): Game {
     const copy = this.dummy_games.find((e) => e.id === gameId);
     if (!copy) {
-      throw new Error(`Copy not found for id =${gameId}`);
+      throw new Error(`Game not found for id =${gameId}`);
     }
-
     return copy;
-  }
-
-  sortedGames(gameSearchValue: string) {
-    return [...this.searchForGames(gameSearchValue)].sort((a, b) => a.name.localeCompare(b.name));
   }
 
   searchForGames(gameSearchValue: string) {
@@ -502,11 +498,11 @@ export class GamesService {
     return this.dummy_games.filter((g) => (term ? g.name.toLowerCase().includes(term) : true));
   }
 
-  selectedGame(selectedGameId: string): Game | undefined {
+  selectedGameById(selectedGameId: string): Game | undefined {
     return this.dummy_games.find((games) => games.id === selectedGameId);
   }
 
-  updateGame(updateGameData: Game) {
+  updateGame(updateGameData: Partial<Game> & { id: string }) {
     const index = this.dummy_games.findIndex((c) => c.id === updateGameData.id);
     if (index !== -1) {
       this.dummy_games[index] = { ...this.dummy_games[index], ...updateGameData };
@@ -524,7 +520,7 @@ export class GamesService {
       return false;
     }
     this.dummy_games.push({ ...newGame });
-    this.saveGames;
+    this.saveGames();
     return true;
   }
 

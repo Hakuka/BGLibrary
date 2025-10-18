@@ -1,9 +1,9 @@
 <div class="backdrop" (click)="onCancel()"></div>
 <dialog open>
   <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Display for edit copy -->
     @if (editTypeDisplay === 'C'){
     <h2>Edit Copy</h2>
-
     <label for="Copy">Copy</label>
     <select
       id="Copy"
@@ -17,6 +17,8 @@
       <option [value]="copy.id">{{ copy.id }}</option>
       }
     </select>
+    <!-- display only if copy is selected -->
+    @if(updateCopy.id){
 
     <label for="weight">Weight *</label>
     <input
@@ -27,7 +29,6 @@
       required
       placeholder="e.g. 3"
     />
-
     <label for="copyComment">Comment</label>
     <textarea
       id="copyComment"
@@ -37,16 +38,16 @@
       placeholder="Used copy, tiles slightly scratched."
     >
     </textarea>
-
-    } @else if (editTypeDisplay === 'G') {
+    } }
+    <!-- display for edit game -->
+    @else if (editTypeDisplay === 'G') {
     <h2>Edit Game</h2>
-
     <label for="Game">Game *</label>
     <select
       id="Game"
       name="Game"
       required
-      [(ngModel)]="updateCopy.gameId"
+      [(ngModel)]="updateGame.id"
       (ngModelChange)="onGameSelect($event)"
     >
       <option disabled selected value="">Select a game</option>
@@ -54,7 +55,8 @@
       <option [value]="game.id">{{ game.name }}</option>
       }
     </select>
-
+    <!-- display only if game is selected -->
+    @if(updateGame.id){
     <label for="gameId">ID *</label>
     <input
       id="gameId"
@@ -64,11 +66,6 @@
       disabled
       placeholder="e.g. g3"
     />
-
-    @if (errorMessage) {
-    <small class="hint">{{ errorMessage }}</small>
-    }
-
     <label for="shortDescription">Short description</label>
     <input
       id="gameShortDescription"
@@ -86,7 +83,6 @@
       [(ngModel)]="updateGame.numberOfPlayers"
       placeholder="e.g. 2-5"
     />
-
     <label for="gamePlayingTime">Playing time</label>
     <input
       id="gamePlayingTime"
@@ -95,7 +91,6 @@
       [(ngModel)]="updateGame.playingTime"
       placeholder="e.g. 2-5"
     />
-
     <label for="gameMinAge">Min age</label>
     <input
       id="gameMinAge"
@@ -104,7 +99,6 @@
       [(ngModel)]="updateGame.minAge"
       placeholder="e.g. 11"
     />
-
     <label for="gameWeight">Weight</label>
     <input
       id="gameWeight"
@@ -113,7 +107,6 @@
       [(ngModel)]="updateGame.weight"
       placeholder="e.g. 11"
     />
-
     <label for="gameDesigner">Designer</label>
     <input
       id="gameDesigner"
@@ -122,7 +115,6 @@
       [(ngModel)]="updateGame.designer"
       placeholder="e.g. John Game Changer"
     />
-
     <label for="gameArtist">Artist</label>
     <input
       id="gameArtist"
@@ -131,7 +123,6 @@
       [(ngModel)]="updateGame.artist"
       placeholder="e.g. Borys Art Maker"
     />
-
     <label for="gameComment">Comment</label>
     <textarea
       id="gameComment"
@@ -141,8 +132,7 @@
       placeholder="Used copy, tiles slightly scratched."
     >
     </textarea>
-
-    }
+    } }
     <p class="actions">
       <button type="button" (click)="onCancel()">Cancel</button>
       <button type="submit" [disabled]="f.invalid">Update</button>

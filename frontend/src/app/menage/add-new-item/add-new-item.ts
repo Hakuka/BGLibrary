@@ -10,7 +10,7 @@ import { GamesService } from '../../shared/services/games.service';
   templateUrl: './add-new-item.html',
   styleUrl: './add-new-item.css',
 })
-export class AddNewItem {
+export class AddNewItemComponent {
   @Output() close = new EventEmitter<void>();
   @Input({ required: true }) addTypeDisplay: string | undefined;
   private gamesService = inject(GamesService);
@@ -23,7 +23,7 @@ export class AddNewItem {
     responsiblePerson: '',
     comment: '',
     gameId: '',
-    weight: 0,
+    weight: undefined,
     borrowed: 'N',
   };
   newGame: Game = {
@@ -31,12 +31,12 @@ export class AddNewItem {
     comment: '',
     designer: '',
     id: '',
-    minAge: 0,
+    minAge: undefined,
     name: '',
     numberOfPlayers: '',
     playingTime: '',
     shortDescription: '',
-    weight: 0,
+    weight: undefined,
   };
 
   onCancel() {
@@ -48,11 +48,13 @@ export class AddNewItem {
       const result = this.copiesService.addCopy(this.newCopy);
       if (result === false) {
         this.errorMessage = 'This ID already exist in the system';
+        return;
       }
     } else if (this.addTypeDisplay === 'G') {
       const result = this.gamesService.addGame(this.newGame);
       if (result === false) {
         this.errorMessage = 'This ID already exist in the system';
+        return;
       }
     }
     this.close.emit();

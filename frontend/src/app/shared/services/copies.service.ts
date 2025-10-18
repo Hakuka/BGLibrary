@@ -198,7 +198,7 @@ export class CopiesService {
     return copy;
   }
 
-  updateCopy(updateCopyData: Copy) {
+  updateCopy(updateCopyData: Partial<Copy> & { id: string }) {
     const index = this.dummy_copies.findIndex((c) => c.id === updateCopyData.id);
     if (index !== -1) {
       this.dummy_copies[index] = { ...this.dummy_copies[index], ...updateCopyData };
@@ -226,7 +226,7 @@ export class CopiesService {
       return false;
     }
     this.dummy_copies.push({ ...newCopy });
-    this.saveCopies;
+    this.saveCopies();
     return true;
   }
 }

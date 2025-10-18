@@ -22,7 +22,7 @@ export class BorrowedEditComponent {
   @Input({ required: true }) set copyId(value: string) {
     this.displayedCopy = this.copiesService.getCopyInfo(value);
     this.editedDisplayedCopy = { ...this.displayedCopy };
-    this.selectedGame = this.gamesService.selectedGame(this.displayedCopy.gameId);
+    this.selectedGame = this.gamesService.selectedGameById(this.displayedCopy.gameId);
   }
 
   onCancel() {

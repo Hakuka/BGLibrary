@@ -5,7 +5,7 @@
     <p>
       <label for="Copy">Copy *</label>
       <select id="Copy" name="Copy" required [(ngModel)]="selectedItemId">
-        <option disabled selected value="">Select a copy to remove</option>
+        <option disabled value="">Select a copy to remove</option>
         @for (copy of copies; track copy.id) {
         <option [value]="copy.id">{{ copy.id }}</option>
         }

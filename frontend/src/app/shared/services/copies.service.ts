@@ -226,7 +226,7 @@ export class CopiesService {
       return false;
     }
     this.dummy_copies.push({ ...newCopy });
-    this.saveCopies;
+    this.saveCopies();
     return true;
   }
 }

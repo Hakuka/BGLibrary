@@ -23,7 +23,7 @@ export class AddNewItemComponent {
     responsiblePerson: '',
     comment: '',
     gameId: '',
-    weight: 0,
+    weight: undefined,
     borrowed: 'N',
   };
   newGame: Game = {
@@ -31,12 +31,12 @@ export class AddNewItemComponent {
     comment: '',
     designer: '',
     id: '',
-    minAge: 0,
+    minAge: undefined,
     name: '',
     numberOfPlayers: '',
     playingTime: '',
     shortDescription: '',
-    weight: 0,
+    weight: undefined,
   };
 
   onCancel() {
@@ -48,11 +48,13 @@ export class AddNewItemComponent {
       const result = this.copiesService.addCopy(this.newCopy);
       if (result === false) {
         this.errorMessage = 'This ID already exist in the system';
+        return;
       }
     } else if (this.addTypeDisplay === 'G') {
       const result = this.gamesService.addGame(this.newGame);
       if (result === false) {
         this.errorMessage = 'This ID already exist in the system';
+        return;
       }
     }
     this.close.emit();

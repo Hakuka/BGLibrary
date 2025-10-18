@@ -16,7 +16,7 @@ export class BorrowedAddComponent {
 
   enteredGame!: string;
   enteredCopy?: string;
-  enteredWeight?: number;
+  enteredWeight?: number | null;
   enteredResponsiblePerson?: string;
   enteredComment?: string;
 
@@ -28,7 +28,7 @@ export class BorrowedAddComponent {
   }
 
   onSubmit() {
-    if (!this.enteredGame || !this.enteredCopy || !this.enteredWeight) {
+    if (!this.enteredGame || !this.enteredCopy || this.enteredWeight === undefined) {
       //TODO: add banner error handling
       return;
     }

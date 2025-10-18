@@ -1,9 +1,9 @@
 <div class="backdrop" (click)="onCancel()"></div>
 <dialog open>
   <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Add new copy -->
     @if (addTypeDisplay === 'C'){
     <h2>Add Copy</h2>
-
     <label for="Game">Game *</label>
     <select id="Game" name="Game" required [(ngModel)]="newCopy.gameId">
       <option disabled selected value="">Select a game for which a copy will be added</option>
@@ -45,10 +45,9 @@
       placeholder="Used copy, tiles slightly scratched."
     >
     </textarea>
-
+    <!-- Add new game -->
     } @else if (addTypeDisplay === 'G') {
     <h2>Add Game</h2>
-
     <label for="Game">Game name*</label>
     <input
       id="GameName"
@@ -73,7 +72,7 @@
     <small class="hint">{{ errorMessage }}</small>
     }
 
-    <label for="shortDescription">Short description *</label>
+    <label for="shortDescription">Short description</label>
     <input
       id="gameShortDescription"
       name="gameShortDescription"
@@ -82,29 +81,31 @@
       [(ngModel)]="newGame.shortDescription"
       placeholder="Easy and fast game"
     />
-    <label for="gameNumberOfPlayers">Number of players</label>
+    <label for="gameNumberOfPlayers">Number of players *</label>
     <input
       id="gameNumberOfPlayers"
       name="gameNumberOfPlayers"
       type="text"
+      required
       [(ngModel)]="newGame.numberOfPlayers"
       placeholder="e.g. 2-5"
     />
 
-    <label for="gamePlayingTime">Playing time</label>
+    <label for="gamePlayingTime">Playing time *</label>
     <input
-      id="gameNumberOfPlayers"
-      name="gameNumberOfPlayers"
+      id="gamePlayingTime"
+      name="gamePlayingTime"
       type="text"
-      [(ngModel)]="newGame.numberOfPlayers"
+      required
+      [(ngModel)]="newGame.playingTime"
       placeholder="e.g. 2-5"
     />
-
-    <label for="gameMinAge">Min age</label>
+    <label for="gameMinAge">Min age *</label>
     <input
       id="gameMinAge"
       name="gameMinAge"
-      type="text"
+      type="number"
+      required
       [(ngModel)]="newGame.minAge"
       placeholder="e.g. 11"
     />
@@ -114,24 +115,27 @@
       id="gameWeight"
       name="gameWeight"
       type="number"
+      required
       [(ngModel)]="newGame.weight"
       placeholder="e.g. 11"
     />
 
-    <label for="gameDesigner">Designer</label>
+    <label for="gameDesigner">Designer *</label>
     <input
       id="gameDesigner"
       name="gameDesigner"
       type="text"
+      required
       [(ngModel)]="newGame.designer"
       placeholder="e.g. John Game Changer"
     />
 
-    <label for="gameArtist">Artist</label>
+    <label for="gameArtist">Artist *</label>
     <input
       id="gameArtist"
       name="gameArtist"
       type="text"
+      required
       [(ngModel)]="newGame.artist"
       placeholder="e.g. Borys Art Maker"
     />

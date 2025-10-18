@@ -21,7 +21,7 @@ export class EditItemComponent {
   updateCopy: Pick<Copy, 'id' | 'comment' | 'weight'> = {
     id: '',
     comment: '',
-    weight: 0,
+    weight: undefined,
   };
   updateGame: Pick<
     Game,
@@ -39,11 +39,11 @@ export class EditItemComponent {
     artist: '',
     comment: '',
     designer: '',
-    minAge: 0,
+    minAge: undefined,
     numberOfPlayers: '',
     playingTime: '',
     shortDescription: '',
-    weight: 0,
+    weight: undefined,
   };
 
   onCancel() {

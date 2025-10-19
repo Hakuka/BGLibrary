@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { AddNewItemComponent } from './add-new-item/add-new-item';
-import { EditItemComponent } from './edit-item/edit-item';
-import { RemoveItemComponent } from './remove-item/remove-item';
 
 @Component({
   selector: 'menage',
-  imports: [RemoveItemComponent, AddNewItemComponent, EditItemComponent],
   templateUrl: './menage.html',
   styleUrl: './menage.css',
+  standalone: false,
 })
 export class MenageComponent {
   isRemoving: boolean = false;

@@ -1,13 +1,12 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 
 @Component({
   selector: 'remove-item',
-  imports: [FormsModule],
   templateUrl: './remove-item.html',
   styleUrl: './remove-item.css',
+  standalone: false,
 })
 export class RemoveItemComponent {
   @Output() close = new EventEmitter<void>();

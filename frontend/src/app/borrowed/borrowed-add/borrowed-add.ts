@@ -1,13 +1,12 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 @Component({
   selector: 'borrowed-add',
-  imports: [FormsModule],
   templateUrl: './borrowed-add.html',
   styleUrl: './borrowed-add.css',
+  standalone: false,
 })
 export class BorrowedAddComponent {
   @Output() close = new EventEmitter<void>();

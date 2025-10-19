@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { GamesService } from '../../shared/services/games.service';
 
 @Component({
   selector: 'app-game',
-  imports: [FormsModule],
   templateUrl: './games.html',
   styleUrl: './games.css',
+  standalone: false,
 })
 export class GamesComponent {
   private gamesService = inject(GamesService);

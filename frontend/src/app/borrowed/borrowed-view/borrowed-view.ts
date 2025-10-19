@@ -1,15 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CopiesService } from '../shared/services/copies.service';
-import { GamesService } from '../shared/services/games.service';
-import { BorrowedAddComponent } from './borrowed-add/borrowed-add';
-import { BorrowedEditComponent } from './borrowed-edit/borrowed-edit';
+import { CopiesService } from '../../shared/services/copies.service';
+import { GamesService } from '../../shared/services/games.service';
 
 @Component({
   selector: 'borrowed-view',
-  imports: [FormsModule, BorrowedAddComponent, BorrowedEditComponent],
   templateUrl: './borrowed-view.html',
   styleUrl: './borrowed-view.css',
+  standalone: false,
 })
 export class BorrowedViewComponent {
   private copiesService = inject(CopiesService);

@@ -4,9 +4,9 @@ import { CopiesService } from '../../shared/services/copies.service';
 
 @Component({
   selector: 'copies-details',
-  imports: [],
   templateUrl: './copies-details.html',
   styleUrl: './copies-details.css',
+  standalone: false,
 })
 export class CopiesDetailsComponent {
   private copiesService = inject(CopiesService);

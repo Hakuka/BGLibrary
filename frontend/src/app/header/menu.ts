@@ -2,9 +2,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-menu',
-  imports: [],
   templateUrl: './menu.html',
   styleUrl: './menu.css',
+  standalone: false,
 })
 export class MenuComponent {
   @Output() select = new EventEmitter<string>();

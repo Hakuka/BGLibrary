@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 
 import { type Copy } from '../../shared/models/copy.model';
 import { type Game } from '../../shared/models/game.model';
@@ -8,9 +7,9 @@ import { GamesService } from '../../shared/services/games.service';
 
 @Component({
   selector: 'borrowed-edit',
-  imports: [FormsModule],
   templateUrl: './borrowed-edit.html',
   styleUrl: './borrowed-edit.css',
+  standalone: false,
 })
 export class BorrowedEditComponent {
   private copiesService = inject(CopiesService);

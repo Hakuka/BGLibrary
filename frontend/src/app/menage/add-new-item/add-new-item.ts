@@ -1,14 +1,14 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Copy } from '../../shared/models/copy.model';
 import { Game } from '../../shared/models/game.model';
 import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
+
 @Component({
   selector: 'add-new-item',
-  imports: [FormsModule],
   templateUrl: './add-new-item.html',
   styleUrl: './add-new-item.css',
+  standalone: false,
 })
 export class AddNewItemComponent {
   @Output() close = new EventEmitter<void>();

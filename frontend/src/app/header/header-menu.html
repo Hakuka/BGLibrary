@@ -1,0 +1,41 @@
+<nav>
+  <!-- logo -->
+  <div class="container-fluid px-0">
+    <div class="row gx-0 align-items-stretch">
+      <div class="col-auto">
+        <img src="assets/bgl-logo.png" alt="Board Game Library" class="img-fluid" />
+      </div>
+
+      <div class="col">
+        <div class="d-flex h-100">
+          <button
+            type="button"
+            class="btn flex-fill"
+            (click)="onSelect('menu1')"
+            [class.active]="selectedMenu === 'menu1'"
+          >
+            Games
+          </button>
+
+          <button
+            type="button"
+            class="btn flex-fill"
+            (click)="onSelect('menu2')"
+            [class.active]="selectedMenu === 'menu2'"
+          >
+            Borrowed
+          </button>
+
+          <button
+            type="button"
+            class="btn flex-fill"
+            (click)="onSelect('menu3')"
+            [class.active]="selectedMenu === 'menu3'"
+          >
+            Manage
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

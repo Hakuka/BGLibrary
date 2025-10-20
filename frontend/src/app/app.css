@@ -1,12 +1,13 @@
+main {
+  margin-top: 50px;
+  height: calc(100vh - 50px);
+  overflow-y: auto;
+}
+
 #fallback {
   font-weight: bold;
   font-size: 1.15rem;
   margin: 0;
   text-align: center;
   color: #ad410f;
-}
-
-.game-table {
-  max-height: calc(100vh - 150px);
-  overflow-y: auto;
 }

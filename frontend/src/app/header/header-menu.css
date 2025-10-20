@@ -1,11 +1,17 @@
 nav {
   background-color: #ad410f;
-  /* border-top: 1px solid white; */
+  height: 50px;
+  position: fixed;
+  width: 100%;
+  top: 0;
 }
+
+nav img.img-fluid {
+  max-height: 50px;
+}
+
 nav .btn {
   color: white;
-  border: 0;
-  border-radius: 0;
 }
 
 button:hover,
@@ -13,5 +19,4 @@ button:active,
 .active {
   background-color: color-mix(in srgb, #ad410f 80%, white 15%);
   color: white !important;
-  font-weight: bold;
 }

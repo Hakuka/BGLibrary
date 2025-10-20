@@ -1,5 +1,4 @@
-﻿<app-header />
-<app-menu (select)="onSelectMenu($event)" />
+﻿<header-menu (select)="onSelectMenu($event)" />
 <main>
   @if (selectedMenuOption === "menu1") {
   <div class="container-fluid">
@@ -8,7 +7,7 @@
       <app-game class="col-2" (selectedGame)="onSelectedGame($event)" />
       <!-- selected game -->
       <div class="col">
-        <h2 class="text-center mb-3 fw-bold sticky-top bg-body">{{ currentGame?.name }}</h2>
+        <h2 class="text-center mb-3 fw-bold sticky-top">{{ currentGame?.name }}</h2>
         <div class="game-table">
           <game-details [selectedGame]="currentGame" />
           <copies-details [selectedGame]="currentGame" />
@@ -21,8 +20,10 @@
   } @else if (selectedMenuOption === "menu3") {
   <menage />
   }@else {
-  <p id="fallback">Welcome, select an option at the top to get started :)</p>
-  <p class="text-center">Current state of project:</p>
-  <p class="text-center"><img src="assets/meme1.jpg" alt="meme1" /></p>
+  <div id="fallback">
+    <p>Welcome, select an option at the top to get started :)</p>
+    <p class="text-center">Current state of project:</p>
+    <p class="text-center"><img src="assets/meme1.jpg" alt="meme1" /></p>
+  </div>
   }
 </main>

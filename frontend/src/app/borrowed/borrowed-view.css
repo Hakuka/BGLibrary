@@ -1,12 +1,15 @@
+label {
+  visibility: hidden;
+}
 .borrow-game {
+  position: fixed;
   bottom: 20px;
   right: 20px;
   width: 60px;
   height: 60px;
 }
 
-.borrow-game:hover,
-.borrow-game:active {
+.borrow-game:hover {
   background-color: #db6129;
 }
 
@@ -16,18 +19,6 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  padding: 0;
   border-radius: 999px;
   line-height: 1;
-}
-
-.btn-icon i {
-  font-size: 1rem;
-}
-
-.btn-icon {
-  transition: transform 120ms ease;
-}
-.btn-icon:hover {
-  transform: translateY(-1px);
 }

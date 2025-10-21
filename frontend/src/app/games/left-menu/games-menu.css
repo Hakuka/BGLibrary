@@ -1,0 +1,26 @@
+.left-menu {
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+  background: color-mix(in srgb, #ad410f 80%, white 40%);
+}
+
+.left-menu .nav-link {
+  font-weight: 600;
+  background-color: color-mix(in srgb, #ad410f 80%, white 40%);
+  color: #212529;
+  border-radius: 0.375rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+
+.left-menu .nav-link:hover,
+.left-menu .nav-link:active {
+  background-color: whitesmoke;
+  color: #ad410f;
+}
+
+.left-menu .nav-link.active {
+  background-color: whitesmoke;
+  color: #ad410f;
+  border: 1px solid #ad410f;
+}

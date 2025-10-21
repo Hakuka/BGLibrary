@@ -3,12 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { GamesService } from '../../shared/services/games.service';
 
 @Component({
-  selector: 'app-game',
+  selector: 'games-menu',
   imports: [FormsModule],
-  templateUrl: './games.html',
-  styleUrl: './games.css',
+  templateUrl: './games-menu.html',
+  styleUrl: './games-menu.css',
 })
-export class GamesComponent {
+export class GamesMenuComponent {
   private gamesService = inject(GamesService);
   @Output() selectedGame = new EventEmitter<string>();
   gameSearchValue = '';

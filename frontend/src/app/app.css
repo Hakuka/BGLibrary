@@ -11,3 +11,8 @@ main {
   text-align: center;
   color: #ad410f;
 }
+
+.game-table {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}

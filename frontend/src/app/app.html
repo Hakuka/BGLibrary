@@ -4,10 +4,12 @@
   <div class="container-fluid">
     <div class="row">
       <!-- left menu -->
-      <app-game class="col-2" (selectedGame)="onSelectedGame($event)" />
+      <games-menu class="left-menu col-2 ps-0 pe-0" (selectedGame)="onSelectedGame($event)" />
       <!-- selected game -->
       <div class="col">
-        <h2 class="text-center mb-3 fw-bold sticky-top">{{ currentGame?.name }}</h2>
+        <h2 class="text-center fw-bold bg-body position-sticky top-0">
+          {{ currentGame?.name }}
+        </h2>
         <div class="game-table">
           <game-details [selectedGame]="currentGame" />
           <copies-details [selectedGame]="currentGame" />

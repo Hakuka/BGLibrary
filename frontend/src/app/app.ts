@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BorrowedViewComponent } from './borrowed/borrowed-view';
 import { CopiesDetailsComponent } from './games/game-view/copies-details';
 import { GameDetailsComponent } from './games/game-view/game-details';
-import { GamesComponent } from './games/left-menu/games';
+import { GamesMenuComponent } from './games/left-menu/games-menu';
 import { HeaderMenuComponent } from './header/header';
 import { MenageComponent } from './menage/menage';
 import { Game } from './shared/models/game.model';
@@ -13,7 +13,7 @@ import { GamesService } from './shared/services/games.service';
   selector: 'app-root',
   imports: [
     HeaderMenuComponent,
-    GamesComponent,
+    GamesMenuComponent,
     FormsModule,
     BorrowedViewComponent,
     GameDetailsComponent,

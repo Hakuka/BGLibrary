@@ -1,17 +1,21 @@
 <nav class="left-menu">
   <!-- sticky search -->
   <div class="sticky-top bg-body pt-1 pb-1">
-    <input class="form-control" placeholder="Search" [(ngModel)]="gameSearchValue" />
+    <input
+      class="form-control form-control-sm"
+      placeholder="Search"
+      [(ngModel)]="gameSearchValue"
+    />
   </div>
   <!-- list of games -->
-  <ul class="nav nav-pills flex-column">
+  <ul class="nav nav-pills flex-column gap-1 mt-2">
     @for (game of sortedGames(gameSearchValue); track game.id) {
-    <li>
+    <li class="nav-item">
       <button
         type="button"
-        class="btn"
+        class="nav-link w-100 text-start"
         (click)="onSelectGame(game.id)"
-        [class.selected]="selectedGameId === game.id"
+        [class.active]="selectedGameId === game.id"
       >
         <span> {{ game.name }}</span>
       </button>

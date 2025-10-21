@@ -21,7 +21,7 @@
     </div>
   </form>
   <!-- list of borrowed games -->
-  <table class="table table-striped table-hover align-middle">
+  <table class="table table-striped table-hover table-hover-custom align-middle">
     <thead class="table-light">
       <tr>
         <th style="width: 7%">Copy#</th>
@@ -62,7 +62,7 @@
   </table>
 
   <!-- Borrow game button -->
-  <button class="borrow-game rounded-circle" (click)="onStartBorrowingGame()">+</button>
+  <button class="borrow-game-button rounded-circle" (click)="onStartBorrowingGame()">+</button>
 
   <!-- Borrowing game window -->
   @if (isBorrowingGame){

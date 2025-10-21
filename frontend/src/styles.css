@@ -1,0 +1,14 @@
+:root {
+  /* Accepted */
+  --background-color: whitesmoke;
+  --top-menu-color: color-mix(in srgb, var(--select-color) 65%, black);
+  --select-color: #306177;
+  --primary-color: #256e99;
+  /* Working on
+  --select2-color: color-mix(in srgb, var(--select-color) 60%, black);
+  --primary-color: #256e99;
+  --info-color: #121441;
+  --success-color: #409c66;
+  --warning-color: #be8b2e; */
+  /*#E1E7EF #27AEB8 #256E99 #3269BB #121441*/
+}

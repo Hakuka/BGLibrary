@@ -1,5 +1,5 @@
 nav {
-  background-color: #ad410f;
+  background-color: var(--top-menu-color);
   height: 50px;
   position: fixed;
   width: 100%;
@@ -12,11 +12,21 @@ nav img.img-fluid {
 
 nav .btn {
   color: white;
+  border: 0px;
+  border-radius: 0;
+}
+
+nav .btn:first-child {
+  border-top-left-radius: 30px;
+}
+
+nav .btn:last-child {
+  border-top-right-radius: 30px;
 }
 
 button:hover,
 button:active,
 .active {
-  background-color: color-mix(in srgb, #ad410f 80%, white 15%);
+  background-color: var(--select-color);
   color: white !important;
 }

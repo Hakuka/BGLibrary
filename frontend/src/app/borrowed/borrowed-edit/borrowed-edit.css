@@ -1,5 +1,5 @@
 .backdrop {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: var(--backdrop);
   position: fixed;
   top: 0;
   left: 0;
@@ -10,41 +10,48 @@
 dialog {
   width: 90%;
   max-width: 30rem;
-  background-color: #97581d;
+  background-color: var(--background-color);
   border-radius: 6px;
   border: none;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.7);
   overflow: hidden;
-  padding: 1rem;
   top: 5rem;
+}
+
+.form-label {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 1px var(--select-color);
 }
 
 .form-control,
 textarea.form-control {
-  background-color: #da913f;
-  border: 1px solid #dd994c;
+  background-color: var(--field-edit);
+  border: 1px solid var(--primary-color);
 }
 
 .input-group-text {
-  width: 100%;
-  font: inherit;
-  padding: 0.15rem 0.25rem;
-  border-radius: 4px;
-  border: 1px solid #dd994c;
-  background-color: #aa681c;
-}
-.btn.btn-primary {
-  background-color: #d8780b;
-  border-color: #d8780b;
-  transition: all 0.2s ease;
-}
-.btn.btn-primary:hover {
-  background-color: #db8c31;
-  border-color: #db8c31;
+  background-color: var(--field-lock);
 }
 
-.btn.btn-warning {
-  background-color: #ffc107;
-  border-color: #ffc107;
-  color: #4b2e09;
+.btn.btn-primary {
+  background-color: var(--primary-color);
+  border-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.btn.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.btn.btn-primary:hover,
+.btn.btn-secondary:hover {
+  background-color: var(--select-color);
 }

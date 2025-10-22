@@ -1,24 +1,3 @@
-.borrow-game-button {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: none;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  color: #fff;
-}
-
-.borrow-game-button:hover {
-  background-color: var(--primary-color);
-}
-
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
   background-color: var(--primary-color);
@@ -26,7 +5,7 @@
 }
 
 .table-hover i:hover {
-  color: var(--primary-color);
+  color: var(--select-color);
 }
 
 .btn-icon {
@@ -41,4 +20,29 @@
 
 .table-hover tbody tr:hover .btn-outline-secondary.btn-icon i {
   color: whitesmoke !important;
+}
+
+.borrow-game-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+  background-color: var(--top-menu-color);
+  color: #fff;
+}
+
+.borrow-game-button i {
+  font-size: 28px;
+}
+
+.borrow-game-button:hover {
+  background-color: var(--select-color);
 }

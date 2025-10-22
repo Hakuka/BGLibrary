@@ -1,13 +1,16 @@
-.borrow-game {
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
+.borrowed {
+  height: var(--max-height-all);
+  overflow-y: auto;
 }
 
-.borrow-game:hover,
-.borrow-game:active {
-  background-color: #db6129;
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.table-hover i:hover {
+  color: var(--select-color);
 }
 
 .btn-icon {
@@ -16,18 +19,33 @@
   justify-content: center;
   width: 2rem;
   height: 2rem;
-  padding: 0;
   border-radius: 999px;
   line-height: 1;
 }
 
-.btn-icon i {
-  font-size: 1rem;
+.table-hover tbody tr:hover .btn-outline-secondary.btn-icon i {
+  color: whitesmoke !important;
 }
 
-.btn-icon {
-  transition: transform 120ms ease;
+.borrow-game-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--menu-base-color);
+  color: #fff;
 }
-.btn-icon:hover {
-  transform: translateY(-1px);
+
+.borrow-game-button i {
+  font-size: 28px;
+}
+
+.borrow-game-button:hover {
+  background-color: var(--select-color);
 }

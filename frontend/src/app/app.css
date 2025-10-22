@@ -1,12 +1,21 @@
+main {
+  margin-top: 50px;
+  background: var(--background-color);
+}
+
 #fallback {
   font-weight: bold;
   font-size: 1.15rem;
   margin: 0;
   text-align: center;
-  color: #ad410f;
+  color: var(--select-color);
 }
 
 .game-table {
-  max-height: calc(100vh - 150px);
+  max-height: calc(100vh - 100px);
   overflow-y: auto;
+}
+
+.left-menu {
+  background: var(--menu-base-color);
 }

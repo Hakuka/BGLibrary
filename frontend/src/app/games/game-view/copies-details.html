@@ -1,42 +1,46 @@
-<div class="col-6 mx-auto">
-  @if(selectedGameCopies.length >0){
-  <h4 class="text-center mb-3">Owned copies</h4>
-  } @for(copy of selectedGameCopies; track copy.id ) {
-  <!-- Not borrowed copies -->
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      @if(selectedGameCopies.length >0){
+      <h4 class="text-center mb-3">Owned copies</h4>
+      } @for(copy of selectedGameCopies; track copy.id ) {
 
-  @if (copy.borrowed ==="N") {
-  <div>
-    <table class="table table-bordered table-success table-sm">
-      <tbody class="not-borrowed">
-        <tr>
-          <th>ID:</th>
-          <td>{{ copy.id }}</td>
-        </tr>
-        <tr>
-          <th>Comment:</th>
-          <td>{{ copy.comment }}</td>
-        </tr>
-      </tbody>
-    </table>
+      <!-- Not borrowed copies -->
+      @if (copy.borrowed ==="N") {
+      <div>
+        <table class="table table-bordered table-success table-sm">
+          <tbody class="not-borrowed">
+            <tr>
+              <th>ID:</th>
+              <td>{{ copy.id }}</td>
+            </tr>
+            <tr>
+              <th>Comment:</th>
+              <td>{{ copy.comment }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      }
+      <!--Borrowed copies  -->
+      @else {
+      <table class="table table-bordered table-danger table-sm">
+        <tbody class="borrowed">
+          <tr>
+            <th>ID:</th>
+            <td>{{ copy.id }}</td>
+          </tr>
+          <tr>
+            <th>Responsible person:</th>
+            <td>{{ copy.responsiblePerson }}</td>
+          </tr>
+          <tr>
+            <th>Comment:</th>
+            <td>{{ copy.comment }}</td>
+          </tr>
+        </tbody>
+      </table>
+      } }
+    </div>
   </div>
-  }
-  <!--Borrowed copies  -->
-  @else {
-  <table class="table table-bordered table-danger table-sm">
-    <tbody class="borrowed">
-      <tr>
-        <th>ID:</th>
-        <td>{{ copy.id }}</td>
-      </tr>
-      <tr>
-        <th>Responsible person:</th>
-        <td>{{ copy.responsiblePerson }}</td>
-      </tr>
-      <tr>
-        <th>Comment:</th>
-        <td>{{ copy.comment }}</td>
-      </tr>
-    </tbody>
-  </table>
-  } }
 </div>

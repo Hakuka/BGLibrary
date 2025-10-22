@@ -1,44 +1,52 @@
 <div class="backdrop" (click)="onCancel()"></div>
-<dialog open>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
-    <p>
-      <label for="Game">Game</label>
-      <span class="input-group-text" id="Copy" aria-hidden="true">{{ selectedGame?.name }}</span>
-    </p>
-    <p>
-      <label for="Copy">Copy</label>
-      <span class="input-group-text" id="Copy" aria-hidden="true">{{ displayedCopy.id }}</span>
-    </p>
 
-    <p>
-      <label for="person">Responsible Person</label>
+<dialog open>
+  <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
+    <div>
+      <label for="Game" class="form-label">Game</label>
+      <span class="input-group-text" id="Game">{{ selectedGame?.name }}</span>
+    </div>
+    <div>
+      <label for="Copy" class="form-label">Copy</label>
+      <span class="input-group-text" id="Copy">{{ displayedCopy.id }}</span>
+    </div>
+    <div>
+      <label for="person" class="form-label">Responsible Person</label>
       <input
         type="text"
         id="person"
         name="person"
+        class="form-control"
         [(ngModel)]="editedDisplayedCopy.responsiblePerson"
       />
-    </p>
-    <p>
-      <label for="Weight">Weight *</label>
+    </div>
+    <div>
+      <label for="Weight" class="form-label">Weight *</label>
       <input
         type="number"
         step="0.01"
         id="Weight"
         name="Weight"
+        class="form-control"
         [(ngModel)]="editedDisplayedCopy.weight"
         required
       />
-    </p>
-    <p>
-      <label for="Comment">Comment</label>
-      <textarea id="Comment" name="Comment" [(ngModel)]="editedDisplayedCopy.comment"></textarea>
-    </p>
+    </div>
+    <div>
+      <label for="Comment" class="form-label">Comment</label>
+      <textarea
+        id="Comment"
+        name="Comment"
+        class="form-control"
+        rows="3"
+        [(ngModel)]="editedDisplayedCopy.comment"
+      ></textarea>
+    </div>
 
-    <p class="actions">
-      <button type="button" (click)="onCancel()">Cancel</button>
-      <button type="button" (click)="onReturn()">Return</button>
-      <button type="submit" [disabled]="f.invalid">Update</button>
-    </p>
+    <div class="actions d-flex justify-content-end gap-2 mt-3">
+      <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+      <button type="button" class="btn btn-secondary" (click)="onReturn()">Return game</button>
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Update</button>
+    </div>
   </form>
 </dialog>

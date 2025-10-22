@@ -1,5 +1,5 @@
 .backdrop {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: var(--backdrop);
   position: fixed;
   top: 0;
   left: 0;
@@ -8,64 +8,53 @@
 }
 
 dialog {
+  position: fixed;
+  top: 5rem;
   width: 90%;
   max-width: 30rem;
-  background-color: #97581d;
+  max-height: calc(100dvh - 100px);
+  overflow: auto;
+  background-color: var(--background-color);
   border-radius: 6px;
   border: none;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
-  padding: 1rem;
-  top: 5rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  font-size: 0.85rem;
-  color: #4b2e09;
+.form-label {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  margin-bottom: 0px;
+  font-weight: 500;
 }
 
-textarea,
-select,
-input {
-  width: 100%;
-  font: inherit;
-  padding: 0.15rem 0.25rem;
-  border-radius: 4px;
-  border: 1px solid #dd994c;
-  background-color: #da913f;
+.form-control:focus {
+  box-shadow: 0 0 0 1px var(--select-color);
 }
 
-.actions {
-  margin: 1rem 0 0;
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.25rem;
+.form-select,
+.form-control,
+textarea.form-control {
+  background-color: var(--field-edit);
+  border: 1px solid var(--primary-color);
 }
 
-button {
-  font: inherit;
-  cursor: pointer;
-  border: none;
-  padding: 0.35rem 1.25rem;
-  border-radius: 4px;
-  background-color: transparent;
+.form-select:disabled {
+  background-color: var(--field-lock);
 }
 
-button[type='button']:hover,
-button[type='button']:active {
-  color: #d8780b;
+.btn.btn-primary {
+  background-color: var(--primary-color);
+  border-color: transparent;
+  transition: all 0.2s ease;
 }
 
-button[type='submit'] {
-  background-color: #d8780b;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
+.btn.btn-secondary {
+  background-color: var(--secondary-color);
+  border-color: transparent;
+  transition: all 0.2s ease;
 }
 
-button[type='submit']:hover,
-button[type='submit']:active {
-  background-color: #d6ccc0;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+.btn.btn-primary:hover,
+.btn.btn-secondary:hover {
+  background-color: var(--select-color);
 }

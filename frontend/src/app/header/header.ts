@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
+  selector: 'header-menu',
   imports: [],
-  templateUrl: './header.html',
-  styleUrl: './header.css',
+  templateUrl: './header-menu.html',
+  styleUrl: './header-menu.css',
 })
-export class HeaderComponent {}
+export class HeaderMenuComponent {
+  @Output() select = new EventEmitter<string>();
+
+  selectedMenu: string | undefined;
+
+  onSelect(option: string) {
+    this.select.emit(option);
+    this.selectedMenu = option;
+  }
+}

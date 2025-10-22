@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  /* colors */
+  --background-color: whitesmoke;
+  --menu-base-color: color-mix(in srgb, #306177 65%, black);
+  --select-color: #306177;
+  /* primary-color is also border field color */
+  --primary-color: #256e99;
+  --secondary-color: color-mix(in srgb, var(--primary-color), white 40%);
+  --backdrop: rgba(99, 99, 99, 0.8);
+  --field-edit: #e1e7ef;
+  --field-lock: color-mix(in srgb, var(--field-edit) 60%, var(--primary-color));
+
+  /* size */
+  --max-height-all: calc(100vh - 50px);
+}

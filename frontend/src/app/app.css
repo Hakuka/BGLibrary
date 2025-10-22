@@ -1,7 +1,5 @@
 main {
   margin-top: 50px;
-  height: calc(100vh - 50px);
-  overflow-y: auto;
   background: var(--background-color);
 }
 
@@ -16,4 +14,8 @@ main {
 .game-table {
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+}
+
+.left-menu {
+  background: var(--menu-base-color);
 }

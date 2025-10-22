@@ -1,5 +1,5 @@
 nav {
-  background-color: var(--top-menu-color);
+  background-color: var(--menu-base-color);
   height: 50px;
   position: fixed;
   width: 100%;

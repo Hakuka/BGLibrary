@@ -1,7 +1,7 @@
 <div class="backdrop" (click)="onCancel()"></div>
 
 <dialog open>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
     <div>
       <label for="Game" class="form-label">Game</label>
       <span class="input-group-text" id="Game">{{ selectedGame?.name }}</span>

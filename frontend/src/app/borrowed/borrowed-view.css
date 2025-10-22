@@ -1,3 +1,8 @@
+.borrowed {
+  height: var(--max-height-all);
+  overflow-y: auto;
+}
+
 .table-hover tbody tr:hover td,
 .table-hover tbody tr:hover th {
   background-color: var(--primary-color);
@@ -28,14 +33,12 @@
   right: 20px;
   width: 60px;
   height: 60px;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   border: none;
   border-radius: 50%;
-  background-color: var(--top-menu-color);
+  background-color: var(--menu-base-color);
   color: #fff;
 }
 

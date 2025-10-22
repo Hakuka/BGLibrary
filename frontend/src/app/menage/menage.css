@@ -1,0 +1,6 @@
+.menage {
+  height: var(--max-height-all);
+  overflow-y: auto;
+  padding-left: 10px;
+  padding-top: 10px;
+}

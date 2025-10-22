@@ -8,14 +8,16 @@
 }
 
 dialog {
+  position: fixed;
+  top: 5rem;
   width: 90%;
   max-width: 30rem;
+  max-height: calc(100dvh - 100px);
+  overflow: auto;
   background-color: var(--background-color);
   border-radius: 6px;
   border: none;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
-  overflow: hidden;
-  top: 5rem;
 }
 
 .form-label {

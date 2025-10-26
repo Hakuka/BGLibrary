@@ -1,0 +1,8 @@
+<label class="form-label" [attr.for]="forId">
+  {{ label }}
+  @if(required){
+  <span> *</span>
+  }
+</label>
+
+<ng-content select="select, input, textarea"></ng-content>

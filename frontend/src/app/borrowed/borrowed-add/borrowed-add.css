@@ -20,28 +20,6 @@ dialog {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.7);
 }
 
-.form-label {
-  font-size: 0.8rem;
-  color: var(--primary-color);
-  margin-bottom: 0px;
-  font-weight: 500;
-}
-
-.form-control:focus {
-  box-shadow: 0 0 0 1px var(--select-color);
-}
-
-.form-select,
-.form-control,
-textarea.form-control {
-  background-color: var(--field-edit);
-  border: 1px solid var(--primary-color);
-}
-
-.form-select:disabled {
-  background-color: var(--field-lock);
-}
-
 .btn.btn-primary {
   background-color: var(--primary-color);
   border-color: transparent;

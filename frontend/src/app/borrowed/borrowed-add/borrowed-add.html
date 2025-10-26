@@ -2,8 +2,7 @@
 
 <dialog open>
   <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
-    <div>
-      <label for="Game" class="form-label">Game *</label>
+    <control label="Game" forId="Game" [required]="true">
       <select
         id="Game"
         name="Game"
@@ -16,11 +15,10 @@
         <option [value]="game.id">{{ game.name }}</option>
         }
       </select>
-    </div>
+    </control>
 
     <!-- only copies from selected game-->
-    <div>
-      <label for="Copy" class="form-label">Copy *</label>
+    <control label="Copy" forId="Copy" [required]="true">
       <select
         id="Copy"
         name="Copy"
@@ -35,10 +33,9 @@
         <option [value]="copy.id">{{ copy.id }}</option>
         } }
       </select>
-    </div>
+    </control>
 
-    <div>
-      <label for="Person" class="form-label">Responsible Person</label>
+    <control label="Responsible Person" forId="Person" [required]="false">
       <input
         type="text"
         id="Person"
@@ -46,10 +43,9 @@
         class="form-control"
         [(ngModel)]="enteredResponsiblePerson"
       />
-    </div>
+    </control>
 
-    <div>
-      <label for="Weight" class="form-label">Weight *</label>
+    <control label="Weight" forId="Weight" [required]="true">
       <input
         type="number"
         step="0.01"
@@ -59,10 +55,9 @@
         [(ngModel)]="enteredWeight"
         required
       />
-    </div>
+    </control>
 
-    <div>
-      <label for="Comment" class="form-label">Comment</label>
+    <control label="Comment" forId="Comment" [required]="false">
       <textarea
         id="Comment"
         name="Comment"
@@ -70,7 +65,7 @@
         rows="3"
         [(ngModel)]="enteredComment"
       ></textarea>
-    </div>
+    </control>
 
     <div class="actions d-flex justify-content-end gap-2 mt-3">
       <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>

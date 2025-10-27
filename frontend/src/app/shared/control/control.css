@@ -19,3 +19,7 @@
 :host ::ng-deep .form-select:disabled {
   background-color: var(--field-lock);
 }
+
+:host ::ng-deep .input-group-text {
+  background-color: var(--field-lock);
+}

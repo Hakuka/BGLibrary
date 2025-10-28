@@ -1,6 +1,4 @@
-<div class="backdrop" (click)="onCancel()"></div>
-
-<dialog open>
+<modal (backdropClick)="onCancel()">
   <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
     <control label="Game" forId="Game" [required]="true">
       <select
@@ -78,4 +76,4 @@
       </button>
     </div>
   </form>
-</dialog>
+</modal>

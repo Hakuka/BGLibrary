@@ -1,6 +1,4 @@
-<div class="backdrop" (click)="onCancel()"></div>
-
-<dialog open>
+<modal (backdropClick)="onCancel()">
   <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
     <control label="Game" forId="Game" [required]="false">
       <span class="input-group-text" id="Game">{{ selectedGame?.name }}</span>
@@ -48,4 +46,4 @@
       <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Update</button>
     </div>
   </form>
-</dialog>
+</modal>

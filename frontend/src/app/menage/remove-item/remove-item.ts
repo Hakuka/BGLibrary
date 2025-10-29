@@ -1,11 +1,13 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ControlComponent } from '../../shared/control/control';
+import { ModalComponent } from '../../shared/modal/modal';
 import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 
 @Component({
   selector: 'remove-item',
-  imports: [FormsModule],
+  imports: [FormsModule, ModalComponent, ControlComponent],
   templateUrl: './remove-item.html',
   styleUrl: './remove-item.css',
 })

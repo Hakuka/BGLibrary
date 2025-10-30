@@ -1,0 +1,25 @@
+.form-label {
+  font-size: 0.8rem;
+  color: var(--primary-color);
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
+:host ::ng-deep .form-control,
+:host ::ng-deep .form-select {
+  background-color: var(--field-edit);
+  border: 1px solid var(--primary-color);
+}
+
+:host ::ng-deep .form-select:focus,
+:host ::ng-deep .form-control:focus {
+  box-shadow: 0 0 0 1px var(--select-color);
+}
+
+:host ::ng-deep .form-select:disabled {
+  background-color: var(--field-lock);
+}
+
+:host ::ng-deep .input-group-text {
+  background-color: var(--field-lock);
+}

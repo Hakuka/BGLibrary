@@ -1,17 +1,14 @@
-<div class="backdrop" (click)="onCancel()"></div>
-
-<dialog open>
+<modal (backdropClick)="onCancel()">
   <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
-    <div>
-      <label for="Game" class="form-label">Game</label>
+    <control label="Game" forId="Game" [required]="false">
       <span class="input-group-text" id="Game">{{ selectedGame?.name }}</span>
-    </div>
-    <div>
-      <label for="Copy" class="form-label">Copy</label>
+    </control>
+
+    <control label="Copy" forId="Copy" [required]="false">
       <span class="input-group-text" id="Copy">{{ displayedCopy.id }}</span>
-    </div>
-    <div>
-      <label for="person" class="form-label">Responsible Person</label>
+    </control>
+
+    <control label="Responsible Person" forId="person" [required]="false">
       <input
         type="text"
         id="person"
@@ -19,9 +16,9 @@
         class="form-control"
         [(ngModel)]="editedDisplayedCopy.responsiblePerson"
       />
-    </div>
-    <div>
-      <label for="Weight" class="form-label">Weight *</label>
+    </control>
+
+    <control label="Weight" forId="Weight" [required]="true">
       <input
         type="number"
         step="0.01"
@@ -31,9 +28,9 @@
         [(ngModel)]="editedDisplayedCopy.weight"
         required
       />
-    </div>
-    <div>
-      <label for="Comment" class="form-label">Comment</label>
+    </control>
+
+    <control label="Comment" forId="Comment" [required]="true">
       <textarea
         id="Comment"
         name="Comment"
@@ -41,7 +38,7 @@
         rows="3"
         [(ngModel)]="editedDisplayedCopy.comment"
       ></textarea>
-    </div>
+    </control>
 
     <div class="actions d-flex justify-content-end gap-2 mt-3">
       <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
@@ -49,4 +46,4 @@
       <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Update</button>
     </div>
   </form>
-</dialog>
+</modal>

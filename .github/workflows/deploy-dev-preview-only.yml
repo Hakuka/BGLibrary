@@ -1,8 +1,8 @@
-name: Preview frontend on GitHub Pages (PRs from dev)
+name: Preview frontend on GitHub Pages (PRs into dev)
 
 on:
   pull_request:
-    branches: ["main"]
+    branches: ["dev"]
     paths:
       - "frontend/**"
 
@@ -36,7 +36,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular (preview)
-        run: npx ng build --configuration production --base-href /BGLibrary/ --output-path docs
+        run: npx ng build --configuration production --base-href ./ --output-path docs
 
       - name: Prepare Pages files
         run: |

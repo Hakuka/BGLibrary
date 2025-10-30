@@ -10,6 +10,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  pull-requests: write
 
 concurrency:
   group: "pages-preview"
@@ -51,9 +52,23 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     environment:
       name: github-pages
     steps:
       - name: Deploy preview to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          preview: true
+
+      - name: Comment preview link on PR
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            **Preview deployed successfully!**
+            [View Deployment](${{ steps.deployment.outputs.page_url }})
+
+            *(Temporary preview for this PR — auto-updated on every push.)*

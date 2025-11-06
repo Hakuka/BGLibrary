@@ -167,9 +167,11 @@
       </textarea>
     </control>
     } }
-    <p class="actions">
-      <button type="button" (click)="onCancel()">Cancel</button>
-      <button type="submit" [disabled]="f.invalid">Update</button>
-    </p>
+    <button-group>
+      <app-button buttonType="button" variant="secondary" (buttonClick)="onCancel()"
+        >Cancel</app-button
+      >
+      <app-button buttonType="submit" variant="primary" [disabled]="f.invalid">Add</app-button>
+    </button-group>
   </form>
 </modal>

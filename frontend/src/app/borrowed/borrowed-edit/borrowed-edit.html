@@ -40,10 +40,14 @@
       ></textarea>
     </control>
 
-    <div class="actions d-flex justify-content-end gap-2 mt-3">
-      <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
-      <button type="button" class="btn btn-secondary" (click)="onReturn()">Return game</button>
-      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Update</button>
-    </div>
+    <button-group>
+      <app-button buttonType="button" variant="secondary" (buttonClick)="onCancel()"
+        >Cancel</app-button
+      >
+      <app-button buttonType="button" variant="secondary" (buttonClick)="onReturn()">
+        Return game
+      </app-button>
+      <app-button buttonType="submit" variant="primary" [disabled]="f.invalid">Update</app-button>
+    </button-group>
   </form>
 </modal>

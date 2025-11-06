@@ -1,13 +1,16 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { ButtonGroup } from '../../shared/button-group/button-group';
+import { ButtonComponent } from '../../shared/button/button';
 import { ControlComponent } from '../../shared/control/control';
 import { ModalComponent } from '../../shared/modal/modal';
 import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
+
 @Component({
   selector: 'borrowed-add',
-  imports: [FormsModule, ControlComponent, ModalComponent],
+  imports: [FormsModule, ControlComponent, ModalComponent, ButtonComponent, ButtonGroup],
   templateUrl: './borrowed-add.html',
   styleUrl: './borrowed-add.css',
 })

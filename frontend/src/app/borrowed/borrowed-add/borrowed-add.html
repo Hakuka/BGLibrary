@@ -65,15 +65,18 @@
       ></textarea>
     </control>
 
-    <div class="actions d-flex justify-content-end gap-2 mt-3">
-      <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+    <button-group>
+      <button appButton buttonType="button" variant="secondary" (buttonClick)="onCancel()">
+        Cancel
+      </button>
       <button
-        type="submit"
-        class="btn btn-primary"
+        appButton
+        buttonType="submit"
+        variant="primary"
         [disabled]="f.invalid || !enteredGame || !enteredCopy"
       >
         Borrow
       </button>
-    </div>
+    </button-group>
   </form>
 </modal>

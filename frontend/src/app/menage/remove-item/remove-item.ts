@@ -1,5 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonGroup } from '../../shared/button-group/button-group';
+import { ButtonComponent } from '../../shared/button/button';
 import { ControlComponent } from '../../shared/control/control';
 import { ModalComponent } from '../../shared/modal/modal';
 import { CopiesService } from '../../shared/services/copies.service';
@@ -7,7 +9,7 @@ import { GamesService } from '../../shared/services/games.service';
 
 @Component({
   selector: 'remove-item',
-  imports: [FormsModule, ModalComponent, ControlComponent],
+  imports: [FormsModule, ModalComponent, ControlComponent, ButtonComponent, ButtonGroup],
   templateUrl: './remove-item.html',
   styleUrl: './remove-item.css',
 })

@@ -181,9 +181,11 @@
     </control>
 
     }
-    <p class="actions">
-      <button type="button" (click)="onCancel()">Cancel</button>
-      <button type="submit" [disabled]="f.invalid">Add</button>
-    </p>
+    <button-group>
+      <button appButton buttonType="button" variant="secondary" (buttonClick)="onCancel()">
+        Cancel
+      </button>
+      <button appButton buttonType="submit" variant="primary" [disabled]="f.invalid">Add</button>
+    </button-group>
   </form> </modal
 >>

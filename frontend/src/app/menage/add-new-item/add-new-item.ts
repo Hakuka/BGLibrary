@@ -1,5 +1,7 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ButtonGroup } from '../../shared/button-group/button-group';
+import { ButtonComponent } from '../../shared/button/button';
 import { ControlComponent } from '../../shared/control/control';
 import { ModalComponent } from '../../shared/modal/modal';
 import { Copy } from '../../shared/models/copy.model';
@@ -8,7 +10,7 @@ import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 @Component({
   selector: 'add-new-item',
-  imports: [FormsModule, ModalComponent, ControlComponent],
+  imports: [FormsModule, ModalComponent, ControlComponent, ButtonComponent, ButtonGroup],
   templateUrl: './add-new-item.html',
   styleUrl: './add-new-item.css',
 })

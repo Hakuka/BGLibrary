@@ -182,10 +182,10 @@
 
     }
     <button-group>
-      <app-button buttonType="button" variant="secondary" (buttonClick)="onCancel()"
-        >Cancel</app-button
-      >
-      <app-button buttonType="submit" variant="primary" [disabled]="f.invalid">Add</app-button>
+      <button appButton buttonType="button" variant="secondary" (buttonClick)="onCancel()">
+        Cancel
+      </button>
+      <button appButton buttonType="submit" variant="primary" [disabled]="f.invalid">Add</button>
     </button-group>
   </form> </modal
 >>

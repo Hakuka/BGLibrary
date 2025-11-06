@@ -1,6 +1,10 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { ButtonGroup } from '../../shared/button-group/button-group';
+import { ButtonComponent } from '../../shared/button/button';
+import { ControlComponent } from '../../shared/control/control';
+import { ModalComponent } from '../../shared/modal/modal';
 import { type Copy } from '../../shared/models/copy.model';
 import { type Game } from '../../shared/models/game.model';
 import { CopiesService } from '../../shared/services/copies.service';
@@ -8,7 +12,7 @@ import { GamesService } from '../../shared/services/games.service';
 
 @Component({
   selector: 'borrowed-edit',
-  imports: [FormsModule],
+  imports: [FormsModule, ControlComponent, ModalComponent, ButtonComponent, ButtonGroup],
   templateUrl: './borrowed-edit.html',
   styleUrl: './borrowed-edit.css',
 })

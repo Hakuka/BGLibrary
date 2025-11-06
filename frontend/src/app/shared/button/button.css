@@ -1,0 +1,16 @@
+:host(.btn.btn-primary) {
+  background-color: var(--primary-color);
+  border-color: transparent;
+  transition: all 0.2s ease;
+}
+
+:host(.btn.btn-secondary) {
+  background-color: var(--secondary-color);
+  border-color: transparent;
+  transition: all 0.2s ease;
+}
+
+:host(.btn.btn-primary:hover),
+:host(.btn.btn-secondary:hover) {
+  background-color: var(--select-color);
+}

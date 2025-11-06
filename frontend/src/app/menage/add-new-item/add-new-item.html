@@ -1,159 +1,191 @@
-<div class="backdrop" (click)="onCancel()"></div>
-<dialog open>
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+<modal>
+  <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
     <!-- Add new copy -->
     @if (addTypeDisplay === 'C'){
     <h2>Add Copy</h2>
-    <label for="Game">Game *</label>
-    <select id="Game" name="Game" required [(ngModel)]="newCopy.gameId">
-      <option disabled selected value="">Select a game for which a copy will be added</option>
-      @for (game of games; track game.id) {
-      <option [value]="game.id">{{ game.name }}</option>
-      }
-    </select>
 
-    <label for="copyId">ID *</label>
-    <input
-      id="copyId"
-      name="copyId"
-      type="text"
-      [(ngModel)]="newCopy.id"
-      required
-      placeholder="e.g. c3"
-    />
+    <control label="Game" forId="Game" [required]="true">
+      <select id="Game" name="Game" required [(ngModel)]="newCopy.gameId" class="form-select">
+        <option disabled selected value="">Select a game for which a copy will be added</option>
+        @for (game of games; track game.id) {
+        <option [value]="game.id">{{ game.name }}</option>
+        }
+      </select>
+    </control>
 
+    <control label="Copy ID" forId="copyId" [required]="true">
+      <input
+        id="copyId"
+        name="copyId"
+        type="text"
+        [(ngModel)]="newCopy.id"
+        required
+        placeholder="e.g. c3"
+        class="form-control"
+      />
+    </control>
     @if (errorMessage) {
     <small class="hint">{{ errorMessage }}</small>
     }
 
-    <label for="weight">Weight *</label>
-    <input
-      id="weight"
-      name="weight"
-      type="number"
-      [(ngModel)]="newCopy.weight"
-      required
-      placeholder="e.g. 3"
-    />
+    <control label="Weight" forId="weight" [required]="true">
+      <input
+        id="weight"
+        name="weight"
+        type="number"
+        [(ngModel)]="newCopy.weight"
+        required
+        placeholder="e.g. 3"
+        class="form-control"
+      />
+    </control>
 
-    <label for="copyComment">Comment</label>
-    <textarea
-      id="copyComment"
-      name="copyComment"
-      [(ngModel)]="newCopy.comment"
-      rows="3"
-      placeholder="Used copy, tiles slightly scratched."
-    >
-    </textarea>
+    <control label="Comment" forId="copyComment" [required]="false">
+      <textarea
+        id="copyComment"
+        name="copyComment"
+        [(ngModel)]="newCopy.comment"
+        rows="3"
+        placeholder="Used copy, tiles slightly scratched."
+        class="form-control"
+      >
+      </textarea>
+    </control>
+
     <!-- Add new game -->
     } @else if (addTypeDisplay === 'G') {
     <h2>Add Game</h2>
-    <label for="Game">Game name*</label>
-    <input
-      id="GameName"
-      name="GameName"
-      type="text"
-      [(ngModel)]="newGame.name"
-      required
-      placeholder="e.g. The long story of burnout"
-    />
 
-    <label for="gameId">ID *</label>
-    <input
-      id="gameId"
-      name="gameId"
-      type="text"
-      [(ngModel)]="newGame.id"
-      required
-      placeholder="e.g. g3"
-    />
+    <control label="Game" forId="GameName" [required]="true">
+      <input
+        id="GameName"
+        name="GameName"
+        type="text"
+        [(ngModel)]="newGame.name"
+        required
+        placeholder="e.g. The long story of burnout"
+        class="form-control"
+      />
+    </control>
+
+    <control label="Game ID" forId="gameId" [required]="true">
+      <input
+        id="gameId"
+        name="gameId"
+        type="text"
+        [(ngModel)]="newGame.id"
+        required
+        placeholder="e.g. g3"
+        class="form-control"
+      />
+    </control>
 
     @if (errorMessage) {
     <small class="hint">{{ errorMessage }}</small>
     }
 
-    <label for="shortDescription">Short description</label>
-    <input
-      id="gameShortDescription"
-      name="gameShortDescription"
-      type="text"
-      rows="2"
-      [(ngModel)]="newGame.shortDescription"
-      placeholder="Easy and fast game"
-    />
-    <label for="gameNumberOfPlayers">Number of players *</label>
-    <input
-      id="gameNumberOfPlayers"
-      name="gameNumberOfPlayers"
-      type="text"
-      required
-      [(ngModel)]="newGame.numberOfPlayers"
-      placeholder="e.g. 2-5"
-    />
+    <control label="Short description" forId="shortDescription" [required]="false">
+      <input
+        id="gameShortDescription"
+        name="gameShortDescription"
+        type="text"
+        rows="2"
+        [(ngModel)]="newGame.shortDescription"
+        placeholder="Easy and fast game"
+        class="form-control"
+      />
+    </control>
 
-    <label for="gamePlayingTime">Playing time *</label>
-    <input
-      id="gamePlayingTime"
-      name="gamePlayingTime"
-      type="text"
-      required
-      [(ngModel)]="newGame.playingTime"
-      placeholder="e.g. 2-5"
-    />
-    <label for="gameMinAge">Min age *</label>
-    <input
-      id="gameMinAge"
-      name="gameMinAge"
-      type="number"
-      required
-      [(ngModel)]="newGame.minAge"
-      placeholder="e.g. 11"
-    />
+    <control label="Number of players" forId="gameNumberOfPlayers" [required]="true">
+      <input
+        id="gameNumberOfPlayers"
+        name="gameNumberOfPlayers"
+        type="text"
+        required
+        [(ngModel)]="newGame.numberOfPlayers"
+        placeholder="e.g. 2-5"
+        class="form-control"
+      />
+    </control>
 
-    <label for="gameWeight">Weight *</label>
-    <input
-      id="gameWeight"
-      name="gameWeight"
-      type="number"
-      required
-      [(ngModel)]="newGame.weight"
-      placeholder="e.g. 11"
-    />
+    <control label="Playing time" forId="gamePlayingTime" [required]="true">
+      <input
+        id="gamePlayingTime"
+        name="gamePlayingTime"
+        type="text"
+        required
+        [(ngModel)]="newGame.playingTime"
+        placeholder="e.g. 2-5"
+        class="form-control"
+      />
+    </control>
 
-    <label for="gameDesigner">Designer *</label>
-    <input
-      id="gameDesigner"
-      name="gameDesigner"
-      type="text"
-      required
-      [(ngModel)]="newGame.designer"
-      placeholder="e.g. John Game Changer"
-    />
+    <control label="Min age" forId="gameMinAge" [required]="true">
+      <input
+        id="gameMinAge"
+        name="gameMinAge"
+        type="number"
+        required
+        [(ngModel)]="newGame.minAge"
+        placeholder="e.g. 11"
+        class="form-control"
+      />
+    </control>
 
-    <label for="gameArtist">Artist *</label>
-    <input
-      id="gameArtist"
-      name="gameArtist"
-      type="text"
-      required
-      [(ngModel)]="newGame.artist"
-      placeholder="e.g. Borys Art Maker"
-    />
+    <control label="Weight" forId="gameWeight" [required]="true">
+      <input
+        id="gameWeight"
+        name="gameWeight"
+        type="number"
+        required
+        [(ngModel)]="newGame.weight"
+        placeholder="e.g. 11"
+        class="form-control"
+      />
+    </control>
 
-    <label for="gameComment">Comment</label>
-    <textarea
-      id="gameComment"
-      name="gameComment"
-      [(ngModel)]="newGame.comment"
-      rows="3"
-      placeholder="Used copy, tiles slightly scratched."
-    >
-    </textarea>
+    <control label="Designer" forId="gameDesigner" [required]="true">
+      <input
+        id="gameDesigner"
+        name="gameDesigner"
+        type="text"
+        required
+        [(ngModel)]="newGame.designer"
+        placeholder="e.g. John Game Changer"
+        class="form-control"
+      />
+    </control>
+
+    <control label="Artist" forId="gameArtist" [required]="true">
+      <input
+        id="gameArtist"
+        name="gameArtist"
+        type="text"
+        required
+        [(ngModel)]="newGame.artist"
+        placeholder="e.g. Borys Art Maker"
+        class="form-control"
+      />
+    </control>
+
+    <control label="Comment" forId="gameComment" [required]="false">
+      <textarea
+        id="gameComment"
+        name="gameComment"
+        [(ngModel)]="newGame.comment"
+        rows="3"
+        placeholder="Used copy, tiles slightly scratched."
+        class="form-control"
+      >
+      </textarea>
+    </control>
 
     }
-    <p class="actions">
-      <button type="button" (click)="onCancel()">Cancel</button>
-      <button type="submit" [disabled]="f.invalid">Add</button>
-    </p>
-  </form>
-</dialog>
+    <button-group>
+      <button appButton buttonType="button" variant="secondary" (buttonClick)="onCancel()">
+        Cancel
+      </button>
+      <button appButton buttonType="submit" variant="primary" [disabled]="f.invalid">Add</button>
+    </button-group>
+  </form> </modal
+>>

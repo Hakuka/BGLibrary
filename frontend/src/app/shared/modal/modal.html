@@ -1,5 +1,8 @@
-<div class="backdrop" (click)="onBackdropClick()"></div>
-
-<dialog open>
+<dialog
+  #dialog
+  [attr.aria-label]="label"
+  (cancel)="onCancel($event)"
+  (click)="onDialogClick($event)"
+>
   <ng-content></ng-content>
 </dialog>

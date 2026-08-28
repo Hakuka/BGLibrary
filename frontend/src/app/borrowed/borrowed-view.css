@@ -1,5 +1,5 @@
 .borrowed {
-  height: var(--max-height-all);
+  height: calc(100vh - 50px);
   overflow-y: auto;
 }
 

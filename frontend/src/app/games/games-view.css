@@ -1,0 +1,8 @@
+.game-table {
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+.left-menu {
+  background: var(--menu-base-color);
+}

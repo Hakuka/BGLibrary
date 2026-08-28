@@ -1,8 +1,17 @@
+@if (forId) {
 <label class="form-label" [attr.for]="forId">
   {{ label }}
-  @if(required){
-  <span> *</span>
+  @if (required) {
+  <span aria-hidden="true"> *</span>
   }
 </label>
+} @else {
+<span class="form-label">
+  {{ label }}
+  @if (required) {
+  <span aria-hidden="true"> *</span>
+  }
+</span>
+}
 
-<ng-content select="select, input, textarea, span"></ng-content>
+<ng-content></ng-content>

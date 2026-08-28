@@ -28,10 +28,10 @@
   </div>
 
   @if (isRemoving){
-  <remove-item [removeTypeDisplay]="itemType" (close)="onClose()"></remove-item>
+  <app-remove-item [removeTypeDisplay]="itemType" (closed)="onClose()" />
   } @if (isAdding){
-  <add-new-item [addTypeDisplay]="itemType" (close)="onClose()"></add-new-item>
+  <app-add-new-item [addTypeDisplay]="itemType" (closed)="onClose()" />
   } @if (isEditing){
-  <edit-item [editTypeDisplay]="itemType" (close)="onClose()"></edit-item>
+  <app-edit-item [editTypeDisplay]="itemType" (closed)="onClose()" />
   }
 </div>

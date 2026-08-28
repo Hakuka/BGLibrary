@@ -1,6 +1,37 @@
 import { Injectable } from '@angular/core';
 import { type Copy } from '../models/copy.model';
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
+}
+
+function isOptionalString(value: unknown): value is string | undefined {
+  return value === undefined || typeof value === 'string';
+}
+
+function isOptionalFiniteNumber(value: unknown): value is number | undefined {
+  return value === undefined || (typeof value === 'number' && Number.isFinite(value));
+}
+
+function isCopy(value: unknown): value is Copy {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    typeof value['id'] === 'string' &&
+    typeof value['gameId'] === 'string' &&
+    (value['borrowed'] === 'Y' || value['borrowed'] === 'N') &&
+    isOptionalFiniteNumber(value['weight']) &&
+    isOptionalString(value['comment']) &&
+    isOptionalString(value['responsiblePerson'])
+  );
+}
+
+function cloneCopy(copy: Copy): Copy {
+  return { ...copy };
+}
+
 @Injectable({ providedIn: 'root' })
 export class CopiesService {
   private dummy_copies: Copy[] = [
@@ -174,19 +205,18 @@ export class CopiesService {
   ];
 
   constructor() {
-    const dummy_copies = localStorage.getItem('dummy_copies');
-
-    if (dummy_copies) {
-      this.dummy_copies = JSON.parse(dummy_copies);
+    const storedCopies = this.loadCopies();
+    if (storedCopies !== undefined) {
+      this.dummy_copies = storedCopies;
     }
   }
 
-  getAllCopies() {
-    return this.dummy_copies;
+  getAllCopies(): Copy[] {
+    return this.dummy_copies.map(cloneCopy);
   }
 
-  getAllBorrowedCopies() {
-    return this.dummy_copies.filter((c) => c.borrowed === 'Y');
+  getAllBorrowedCopies(): Copy[] {
+    return this.dummy_copies.filter((copy) => copy.borrowed === 'Y').map(cloneCopy);
   }
 
   getCopyInfo(copyId: string): Copy {
@@ -195,10 +225,10 @@ export class CopiesService {
       throw new Error(`Copy not found for id =${copyId}`);
     }
 
-    return copy;
+    return cloneCopy(copy);
   }
 
-  updateCopy(updateCopyData: Partial<Copy> & { id: string }) {
+  updateCopy(updateCopyData: Partial<Copy> & { id: string }): void {
     const index = this.dummy_copies.findIndex((c) => c.id === updateCopyData.id);
     if (index !== -1) {
       this.dummy_copies[index] = { ...this.dummy_copies[index], ...updateCopyData };
@@ -216,11 +246,7 @@ export class CopiesService {
     this.saveCopies();
   }
 
-  private saveCopies() {
-    localStorage.setItem('dummy_copies', JSON.stringify(this.dummy_copies));
-  }
-
-  addCopy(newCopy: Copy) {
+  addCopy(newCopy: Copy): boolean {
     const exists = this.dummy_copies.some((c) => c.id === newCopy.id);
     if (exists) {
       return false;
@@ -228,5 +254,31 @@ export class CopiesService {
     this.dummy_copies.push({ ...newCopy });
     this.saveCopies();
     return true;
+  }
+
+  private loadCopies(): Copy[] | undefined {
+    try {
+      const serializedCopies = localStorage.getItem('dummy_copies');
+      if (serializedCopies === null) {
+        return undefined;
+      }
+
+      const parsedCopies: unknown = JSON.parse(serializedCopies);
+      if (!Array.isArray(parsedCopies) || !parsedCopies.every(isCopy)) {
+        return undefined;
+      }
+
+      return parsedCopies.map(cloneCopy);
+    } catch {
+      return undefined;
+    }
+  }
+
+  private saveCopies(): void {
+    try {
+      localStorage.setItem('dummy_copies', JSON.stringify(this.dummy_copies));
+    } catch {
+      // The in-memory update remains usable when storage is unavailable or full.
+    }
   }
 }

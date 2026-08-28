@@ -3,21 +3,27 @@
   <div class="container pt-2">
     <form class="row g-2 py-3">
       <div class="col">
+        <label class="visually-hidden" for="searchGame">Game name</label>
         <input
           id="searchGame"
+          type="search"
           class="form-control"
           name="searchGame"
           placeholder="Game name"
-          [(ngModel)]="searchGame"
+          [ngModel]="searchGame"
+          (ngModelChange)="onGameSearchChange($event)"
         />
       </div>
       <div class="col">
+        <label class="visually-hidden" for="searchPerson">Person who borrowed the game</label>
         <input
-          is="searchPerson"
+          id="searchPerson"
+          type="search"
           name="searchPerson"
           class="form-control"
-          placeholder="Person who borrowed the game "
-          [(ngModel)]="searchPerson"
+          placeholder="Person who borrowed the game"
+          [ngModel]="searchPerson"
+          (ngModelChange)="onPersonSearchChange($event)"
         />
       </div>
     </form>
@@ -37,7 +43,7 @@
         @for (copy of filteredCopies; track copy.id) {
         <tr>
           <th>{{ copy.id }}</th>
-          <td>{{ gameNameById(copy.gameId) }}</td>
+          <td>{{ copy.gameName }}</td>
           <td>{{ copy.responsiblePerson }}</td>
           <td>{{ copy.comment }}</td>
           <td>{{ copy.weight }}</td>
@@ -45,16 +51,18 @@
             <button
               type="button"
               class="btn btn-outline-secondary btn-icon me-1"
+              [attr.aria-label]="'Edit borrowing for ' + copy.gameName"
               (click)="onEditBorrowedGame(copy.id)"
             >
-              <i class="bi bi-pencil"></i>
+              <i class="bi bi-pencil" aria-hidden="true"></i>
             </button>
             <button
               type="button"
               class="btn btn-outline-secondary btn-icon"
+              [attr.aria-label]="'Return ' + copy.gameName"
               (click)="returnBorrowedGame(copy.id)"
             >
-              <i class="bi bi-box-arrow-in-down"></i>
+              <i class="bi bi-box-arrow-in-down" aria-hidden="true"></i>
             </button>
           </td>
         </tr>
@@ -63,17 +71,22 @@
     </table>
 
     <!-- Borrow game button -->
-    <button class="borrow-game-button rounded-circle" (click)="onStartBorrowingGame()">
-      <i class="bi bi-plus-lg"></i>
+    <button
+      type="button"
+      class="borrow-game-button rounded-circle"
+      aria-label="Borrow a game"
+      (click)="onStartBorrowingGame()"
+    >
+      <i class="bi bi-plus-lg" aria-hidden="true"></i>
     </button>
 
     <!-- Borrowing game window -->
     @if (isBorrowingGame){
-    <borrowed-add (close)="onCloseBorrowingGame()"></borrowed-add>
+    <app-borrowed-add (closed)="onCloseBorrowingGame()" />
     }
     <!-- Edit borrowed game record -->
     @if (isEditingGame){
-    <borrowed-edit (close)="onCloseEditBorrowedGame()" [copyId]="editingCopyId"></borrowed-edit>
+    <app-borrowed-edit (closed)="onCloseEditBorrowedGame()" [copyId]="editingCopyId" />
     }
   </div>
 </div>

@@ -1,6 +1,9 @@
 {
-  "dependencies": {
-    "bootstrap": "^5.3.8",
-    "bootstrap-icons": "^1.13.1"
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix frontend start",
+    "build": "npm --prefix frontend run build",
+    "watch": "npm --prefix frontend run watch",
+    "test": "npm --prefix frontend test"
   }
 }

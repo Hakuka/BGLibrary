@@ -4,7 +4,7 @@ import { EditItemComponent } from './edit-item/edit-item';
 import { RemoveItemComponent } from './remove-item/remove-item';
 
 @Component({
-  selector: 'menage',
+  selector: 'app-menage',
   imports: [RemoveItemComponent, AddNewItemComponent, EditItemComponent],
   templateUrl: './menage.html',
   styleUrl: './menage.css',

@@ -8,13 +8,13 @@ import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 
 @Component({
-  selector: 'remove-item',
+  selector: 'app-remove-item',
   imports: [FormsModule, ModalComponent, ControlComponent, ButtonComponent, ButtonGroup],
   templateUrl: './remove-item.html',
   styleUrl: './remove-item.css',
 })
 export class RemoveItemComponent {
-  @Output() close = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
   @Input({ required: true }) removeTypeDisplay!: string;
   private copiesService = inject(CopiesService);
   private gamesService = inject(GamesService);
@@ -22,12 +22,12 @@ export class RemoveItemComponent {
   copies = this.copiesService.getAllCopies();
   games = this.gamesService.getAllGames();
 
-  onCancel() {
+  onCancel(): void {
     this.selectedItemId = '';
-    this.close.emit();
+    this.closed.emit();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.removeTypeDisplay === 'C') {
       this.copiesService.removeCopyById(this.selectedItemId);
     } else if (this.removeTypeDisplay === 'G') {
@@ -35,6 +35,6 @@ export class RemoveItemComponent {
       this.copiesService.removeCopyByGameId(this.selectedItemId);
     }
     this.selectedItemId = '';
-    this.close.emit();
+    this.closed.emit();
   }
 }

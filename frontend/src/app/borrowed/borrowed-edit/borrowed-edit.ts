@@ -11,7 +11,7 @@ import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 
 @Component({
-  selector: 'borrowed-edit',
+  selector: 'app-borrowed-edit',
   imports: [FormsModule, ControlComponent, ModalComponent, ButtonComponent, ButtonGroup],
   templateUrl: './borrowed-edit.html',
   styleUrl: './borrowed-edit.css',
@@ -22,38 +22,48 @@ export class BorrowedEditComponent {
   displayedCopy!: Copy;
   editedDisplayedCopy!: Copy;
   selectedGame?: Game;
-  @Output() close = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
   @Input({ required: true }) set copyId(value: string) {
     this.displayedCopy = this.copiesService.getCopyInfo(value);
     this.editedDisplayedCopy = { ...this.displayedCopy };
     this.selectedGame = this.gamesService.selectedGameById(this.displayedCopy.gameId);
   }
 
-  onCancel() {
-    this.close.emit();
+  onCancel(): void {
     this.editedDisplayedCopy = { ...this.displayedCopy };
+    this.closed.emit();
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    const weight = this.editedDisplayedCopy.weight;
+    if (weight == null) {
+      return;
+    }
+
     this.copiesService.updateCopy({
       id: this.displayedCopy.id,
       gameId: this.displayedCopy.gameId,
-      weight: this.editedDisplayedCopy.weight!,
+      weight,
       comment: this.editedDisplayedCopy.comment,
       borrowed: 'Y',
       responsiblePerson: this.editedDisplayedCopy.responsiblePerson,
     });
-    this.close.emit();
+    this.closed.emit();
   }
-  onReturn() {
+  onReturn(): void {
+    const weight = this.editedDisplayedCopy.weight;
+    if (weight == null) {
+      return;
+    }
+
     this.copiesService.updateCopy({
       id: this.displayedCopy.id,
       gameId: this.displayedCopy.gameId,
-      weight: this.editedDisplayedCopy.weight!,
+      weight,
       comment: this.editedDisplayedCopy.comment,
       borrowed: 'N',
       responsiblePerson: '',
     });
-    this.close.emit();
+    this.closed.emit();
   }
 }

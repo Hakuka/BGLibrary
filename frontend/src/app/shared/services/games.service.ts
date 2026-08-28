@@ -1,6 +1,41 @@
 import { Injectable } from '@angular/core';
 import { Game } from '../models/game.model';
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === 'object' && value !== null;
+}
+
+function isOptionalString(value: unknown): value is string | undefined {
+  return value === undefined || typeof value === 'string';
+}
+
+function isOptionalFiniteNumber(value: unknown): value is number | undefined {
+  return value === undefined || (typeof value === 'number' && Number.isFinite(value));
+}
+
+function isGame(value: unknown): value is Game {
+  if (!isRecord(value)) {
+    return false;
+  }
+
+  return (
+    typeof value['id'] === 'string' &&
+    typeof value['name'] === 'string' &&
+    typeof value['numberOfPlayers'] === 'string' &&
+    typeof value['playingTime'] === 'string' &&
+    typeof value['designer'] === 'string' &&
+    typeof value['artist'] === 'string' &&
+    isOptionalFiniteNumber(value['minAge']) &&
+    isOptionalFiniteNumber(value['weight']) &&
+    isOptionalString(value['shortDescription']) &&
+    isOptionalString(value['comment'])
+  );
+}
+
+function cloneGame(game: Game): Game {
+  return { ...game };
+}
+
 @Injectable({ providedIn: 'root' })
 export class GamesService {
   private dummy_games: Game[] = [
@@ -475,34 +510,37 @@ export class GamesService {
     },
   ];
   constructor() {
-    const dummy_games = localStorage.getItem('dummy_games');
-
-    if (dummy_games) {
-      this.dummy_games = JSON.parse(dummy_games);
+    const storedGames = this.loadGames();
+    if (storedGames !== undefined) {
+      this.dummy_games = storedGames;
     }
   }
-  getAllGames() {
-    return this.dummy_games;
+
+  getAllGames(): Game[] {
+    return this.dummy_games.map(cloneGame);
   }
 
   getGameInfo(gameId: string): Game {
-    const copy = this.dummy_games.find((e) => e.id === gameId);
-    if (!copy) {
+    const game = this.dummy_games.find((item) => item.id === gameId);
+    if (!game) {
       throw new Error(`Game not found for id =${gameId}`);
     }
-    return copy;
+    return cloneGame(game);
   }
 
-  searchForGames(gameSearchValue: string) {
+  searchForGames(gameSearchValue: string): Game[] {
     const term = gameSearchValue.trim().toLowerCase();
-    return this.dummy_games.filter((g) => (term ? g.name.toLowerCase().includes(term) : true));
+    return this.dummy_games
+      .filter((game) => (term ? game.name.toLowerCase().includes(term) : true))
+      .map(cloneGame);
   }
 
   selectedGameById(selectedGameId: string): Game | undefined {
-    return this.dummy_games.find((games) => games.id === selectedGameId);
+    const game = this.dummy_games.find((item) => item.id === selectedGameId);
+    return game ? cloneGame(game) : undefined;
   }
 
-  updateGame(updateGameData: Partial<Game> & { id: string }) {
+  updateGame(updateGameData: Partial<Game> & { id: string }): void {
     const index = this.dummy_games.findIndex((c) => c.id === updateGameData.id);
     if (index !== -1) {
       this.dummy_games[index] = { ...this.dummy_games[index], ...updateGameData };
@@ -514,7 +552,7 @@ export class GamesService {
     this.dummy_games = this.dummy_games.filter((g) => g.id !== gameId);
     this.saveGames();
   }
-  addGame(newGame: Game) {
+  addGame(newGame: Game): boolean {
     const exists = this.dummy_games.some((c) => c.id === newGame.id);
     if (exists) {
       return false;
@@ -524,7 +562,29 @@ export class GamesService {
     return true;
   }
 
-  private saveGames() {
-    localStorage.setItem('dummy_games', JSON.stringify(this.dummy_games));
+  private loadGames(): Game[] | undefined {
+    try {
+      const serializedGames = localStorage.getItem('dummy_games');
+      if (serializedGames === null) {
+        return undefined;
+      }
+
+      const parsedGames: unknown = JSON.parse(serializedGames);
+      if (!Array.isArray(parsedGames) || !parsedGames.every(isGame)) {
+        return undefined;
+      }
+
+      return parsedGames.map(cloneGame);
+    } catch {
+      return undefined;
+    }
+  }
+
+  private saveGames(): void {
+    try {
+      localStorage.setItem('dummy_games', JSON.stringify(this.dummy_games));
+    } catch {
+      // The in-memory update remains usable when storage is unavailable or full.
+    }
   }
 }

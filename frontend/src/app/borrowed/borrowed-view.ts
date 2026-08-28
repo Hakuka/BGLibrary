@@ -1,12 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { type Copy } from '../shared/models/copy.model';
 import { CopiesService } from '../shared/services/copies.service';
 import { GamesService } from '../shared/services/games.service';
 import { BorrowedAddComponent } from './borrowed-add/borrowed-add';
 import { BorrowedEditComponent } from './borrowed-edit/borrowed-edit';
 
+interface BorrowedCopyViewModel extends Copy {
+  gameName: string;
+}
+
 @Component({
-  selector: 'borrowed-view',
+  selector: 'app-borrowed-view',
   imports: [FormsModule, BorrowedAddComponent, BorrowedEditComponent],
   templateUrl: './borrowed-view.html',
   styleUrl: './borrowed-view.css',
@@ -19,55 +24,79 @@ export class BorrowedViewComponent {
   searchGame: string = '';
   searchPerson: string = '';
   editingCopyId: string = '';
+  filteredCopies: BorrowedCopyViewModel[] = [];
+  private borrowedCopies: BorrowedCopyViewModel[] = [];
 
-  get filteredCopies() {
-    const termGame = this.searchGame.trim().toLowerCase();
-    const termPerson = this.searchPerson.trim().toLowerCase();
-
-    const games = this.gamesService.getAllGames();
-    const gameById = new Map(games.map((g) => [g.id, g] as const));
-
-    return this.copiesService.getAllBorrowedCopies().filter((copy) => {
-      const game = gameById.get(copy.gameId);
-      if (!game) return false;
-
-      const matchesGame = !termGame || game.name.toLowerCase().includes(termGame);
-      const person = copy.responsiblePerson?.toLowerCase() ?? '';
-      const matchesPerson = !termPerson || person.includes(termPerson);
-
-      return matchesGame && matchesPerson;
-    });
+  constructor() {
+    this.refreshCopies();
   }
 
-  gameNameById(gameId: string): string {
-    const game = this.gamesService.getAllGames().find((g) => g.id === gameId);
-    return game ? game.name : '(unknown)';
+  onGameSearchChange(searchValue: string): void {
+    this.searchGame = searchValue;
+    this.applyFilters();
   }
-  onStartBorrowingGame() {
+
+  onPersonSearchChange(searchValue: string): void {
+    this.searchPerson = searchValue;
+    this.applyFilters();
+  }
+
+  onStartBorrowingGame(): void {
     this.isBorrowingGame = true;
   }
 
-  onCloseBorrowingGame() {
+  onCloseBorrowingGame(): void {
     this.isBorrowingGame = false;
+    this.refreshCopies();
   }
-  onEditBorrowedGame(copyId: string) {
+
+  onEditBorrowedGame(copyId: string): void {
     this.editingCopyId = copyId;
     this.isEditingGame = true;
   }
 
-  onCloseEditBorrowedGame() {
+  onCloseEditBorrowedGame(): void {
     this.isEditingGame = false;
+    this.editingCopyId = '';
+    this.refreshCopies();
   }
 
-  returnBorrowedGame(copyId: string) {
-    const tempCopy = this.copiesService.getCopyInfo(copyId);
+  returnBorrowedGame(copyId: string): void {
     this.copiesService.updateCopy({
-      id: tempCopy.id,
-      gameId: tempCopy.gameId,
-      weight: tempCopy.weight!,
-      comment: tempCopy.comment,
+      id: copyId,
       borrowed: 'N',
       responsiblePerson: '',
+    });
+    this.refreshCopies();
+  }
+
+  private refreshCopies(): void {
+    const gamesById = new Map(this.gamesService.getAllGames().map((game) => [game.id, game]));
+    const borrowedCopies: BorrowedCopyViewModel[] = [];
+
+    for (const copy of this.copiesService.getAllBorrowedCopies()) {
+      const game = gamesById.get(copy.gameId);
+      if (game) {
+        borrowedCopies.push({ ...copy, gameName: game.name });
+      }
+    }
+
+    this.borrowedCopies = borrowedCopies;
+    this.applyFilters();
+  }
+
+  private applyFilters(): void {
+    const gameSearchTerm = this.searchGame.trim().toLowerCase();
+    const personSearchTerm = this.searchPerson.trim().toLowerCase();
+
+    this.filteredCopies = this.borrowedCopies.filter((copy) => {
+      const matchesGame =
+        gameSearchTerm.length === 0 || copy.gameName.toLowerCase().includes(gameSearchTerm);
+      const responsiblePerson = copy.responsiblePerson?.toLowerCase() ?? '';
+      const matchesPerson =
+        personSearchTerm.length === 0 || responsiblePerson.includes(personSearchTerm);
+
+      return matchesGame && matchesPerson;
     });
   }
 }

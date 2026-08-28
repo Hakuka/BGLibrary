@@ -1,29 +1,35 @@
-<modal (backdropClick)="onCancel()">
+<app-modal
+  [label]="removeTypeDisplay === 'C' ? 'Remove copy' : 'Remove game'"
+  (dismissed)="onCancel()"
+>
   <form #f="ngForm" (ngSubmit)="onSubmit()">
-    @if (removeTypeDisplay === 'C'){
-    <control label="Copy" forId="Copy" [required]="true">
+    @if (removeTypeDisplay === 'C') {
+    <app-control label="Copy" forId="Copy" [required]="true">
       <select id="Copy" name="Copy" class="form-select" required [(ngModel)]="selectedItemId">
         <option disabled value="">Select a copy to remove</option>
         @for (copy of copies; track copy.id) {
         <option [value]="copy.id">{{ copy.id }}</option>
         }
       </select>
-    </control>
+    </app-control>
     } @else if (removeTypeDisplay === 'G') {
-    <control label="Game" forId="Game" [required]="true">
+    <app-control label="Game" forId="Game" [required]="true">
       <select id="Game" name="Game" class="form-select" required [(ngModel)]="selectedItemId">
-        <option disabled selected value="">Select a game to remove (with all copies)</option>
+        <option disabled value="">Select a game to remove (with all copies)</option>
         @for (game of games; track game.id) {
         <option [value]="game.id">{{ game.name }}</option>
         }
       </select>
-    </control>
+    </app-control>
     }
-    <button-group>
-      <button appButton buttonType="button" variant="secondary" (buttonClick)="onCancel()">
+
+    <app-button-group>
+      <button app-button buttonType="button" variant="secondary" (buttonClick)="onCancel()">
         Cancel
       </button>
-      <button appButton buttonType="submit" variant="primary" [disabled]="f.invalid">Add</button>
-    </button-group>
+      <button app-button buttonType="submit" variant="primary" [disabled]="f.invalid">
+        Remove
+      </button>
+    </app-button-group>
   </form>
-</modal>
+</app-modal>

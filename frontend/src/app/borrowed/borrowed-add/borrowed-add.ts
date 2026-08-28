@@ -9,18 +9,18 @@ import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 
 @Component({
-  selector: 'borrowed-add',
+  selector: 'app-borrowed-add',
   imports: [FormsModule, ControlComponent, ModalComponent, ButtonComponent, ButtonGroup],
   templateUrl: './borrowed-add.html',
   styleUrl: './borrowed-add.css',
 })
 export class BorrowedAddComponent {
-  @Output() close = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
   private gamesService = inject(GamesService);
   private copiesService = inject(CopiesService);
 
-  enteredGame!: string;
-  enteredCopy?: string;
+  enteredGame = '';
+  enteredCopy = '';
   enteredWeight?: number | null;
   enteredResponsiblePerson?: string;
   enteredComment?: string;
@@ -28,33 +28,33 @@ export class BorrowedAddComponent {
   games = this.gamesService.getAllGames();
   copies = this.copiesService.getAllCopies();
 
-  onCancel() {
-    this.close.emit();
+  onCancel(): void {
+    this.closed.emit();
   }
 
-  onSubmit() {
-    if (!this.enteredGame || !this.enteredCopy || this.enteredWeight === undefined) {
+  onSubmit(): void {
+    if (!this.enteredGame || !this.enteredCopy || this.enteredWeight == null) {
       //TODO: add banner error handling
       return;
     }
     this.copiesService.updateCopy({
       id: this.enteredCopy,
       gameId: this.enteredGame,
-      weight: this.enteredWeight!,
+      weight: this.enteredWeight,
       comment: this.enteredComment,
       borrowed: 'Y',
       responsiblePerson: this.enteredResponsiblePerson,
     });
-    this.close.emit();
+    this.closed.emit();
   }
 
-  onGameChange() {
-    this.enteredCopy = undefined;
+  onGameChange(): void {
+    this.enteredCopy = '';
     this.enteredComment = undefined;
     this.enteredWeight = undefined;
   }
 
-  onCopyChange(copyId: string) {
+  onCopyChange(copyId: string): void {
     const copyInfo = this.copies.find((c) => c.id === copyId);
     if (copyInfo) {
       this.enteredComment = copyInfo.comment;

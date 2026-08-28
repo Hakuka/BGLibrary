@@ -4,12 +4,14 @@
     <input
       class="form-control form-control-sm"
       placeholder="Search"
-      [(ngModel)]="gameSearchValue"
+      aria-label="Search games"
+      [ngModel]="gameSearchValue"
+      (ngModelChange)="onSearchChange($event)"
     />
   </div>
   <!-- list of games -->
   <ul class="nav nav-pills flex-column gap-0 pt-1">
-    @for (game of sortedGames(gameSearchValue); track game.id) {
+    @for (game of filteredGames; track game.id) {
     <li class="nav-item">
       <button
         type="button"

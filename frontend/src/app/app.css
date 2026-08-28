@@ -7,16 +7,6 @@ main {
 #fallback {
   font-weight: bold;
   font-size: 1.15rem;
-  margin: 0;
   text-align: center;
   color: var(--select-color);
-}
-
-.game-table {
-  max-height: calc(100vh - 100px);
-  overflow-y: auto;
-}
-
-.left-menu {
-  background: var(--menu-base-color);
 }

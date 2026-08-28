@@ -1,14 +1,14 @@
-<modal (backdropClick)="onCancel()">
+<app-modal label="Edit borrowed game" (dismissed)="onCancel()">
   <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
-    <control label="Game" forId="Game" [required]="false">
-      <span class="input-group-text" id="Game">{{ selectedGame?.name }}</span>
-    </control>
+    <app-control label="Game" [required]="false">
+      <span class="input-group-text">{{ selectedGame?.name }}</span>
+    </app-control>
 
-    <control label="Copy" forId="Copy" [required]="false">
-      <span class="input-group-text" id="Copy">{{ displayedCopy.id }}</span>
-    </control>
+    <app-control label="Copy" [required]="false">
+      <span class="input-group-text">{{ displayedCopy.id }}</span>
+    </app-control>
 
-    <control label="Responsible Person" forId="person" [required]="false">
+    <app-control label="Responsible Person" forId="person" [required]="false">
       <input
         type="text"
         id="person"
@@ -16,9 +16,9 @@
         class="form-control"
         [(ngModel)]="editedDisplayedCopy.responsiblePerson"
       />
-    </control>
+    </app-control>
 
-    <control label="Weight" forId="Weight" [required]="true">
+    <app-control label="Weight" forId="Weight" [required]="true">
       <input
         type="number"
         step="0.01"
@@ -28,9 +28,9 @@
         [(ngModel)]="editedDisplayedCopy.weight"
         required
       />
-    </control>
+    </app-control>
 
-    <control label="Comment" forId="Comment" [required]="true">
+    <app-control label="Comment" forId="Comment" [required]="false">
       <textarea
         id="Comment"
         name="Comment"
@@ -38,16 +38,24 @@
         rows="3"
         [(ngModel)]="editedDisplayedCopy.comment"
       ></textarea>
-    </control>
+    </app-control>
 
-    <button-group>
-      <button appButton buttonType="button" variant="secondary" (buttonClick)="onCancel()">
+    <app-button-group>
+      <button app-button buttonType="button" variant="secondary" (buttonClick)="onCancel()">
         Cancel
       </button>
-      <button appButton buttonType="button" variant="secondary" (buttonClick)="onReturn()">
+      <button
+        app-button
+        buttonType="button"
+        variant="secondary"
+        [disabled]="f.invalid"
+        (buttonClick)="onReturn()"
+      >
         Return game
       </button>
-      <button appButton buttonType="submit" variant="primary" [disabled]="f.invalid">Update</button>
-    </button-group>
+      <button app-button buttonType="submit" variant="primary" [disabled]="f.invalid">
+        Update
+      </button>
+    </app-button-group>
   </form>
-</modal>
+</app-modal>

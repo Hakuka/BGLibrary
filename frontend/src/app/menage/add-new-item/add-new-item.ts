@@ -9,13 +9,13 @@ import { Game } from '../../shared/models/game.model';
 import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 @Component({
-  selector: 'add-new-item',
+  selector: 'app-add-new-item',
   imports: [FormsModule, ModalComponent, ControlComponent, ButtonComponent, ButtonGroup],
   templateUrl: './add-new-item.html',
   styleUrl: './add-new-item.css',
 })
 export class AddNewItemComponent {
-  @Output() close = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
   @Input({ required: true }) addTypeDisplay: string | undefined;
   private gamesService = inject(GamesService);
   private copiesService = inject(CopiesService);
@@ -43,24 +43,32 @@ export class AddNewItemComponent {
     weight: undefined,
   };
 
-  onCancel() {
-    this.close.emit();
+  onCancel(): void {
+    this.closed.emit();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.addTypeDisplay === 'C') {
+      if (this.newCopy.weight == null) {
+        return;
+      }
+
       const result = this.copiesService.addCopy(this.newCopy);
       if (result === false) {
         this.errorMessage = 'This ID already exist in the system';
         return;
       }
     } else if (this.addTypeDisplay === 'G') {
+      if (this.newGame.minAge == null || this.newGame.weight == null) {
+        return;
+      }
+
       const result = this.gamesService.addGame(this.newGame);
       if (result === false) {
         this.errorMessage = 'This ID already exist in the system';
         return;
       }
     }
-    this.close.emit();
+    this.closed.emit();
   }
 }

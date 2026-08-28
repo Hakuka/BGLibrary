@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row">
+    <app-games-menu
+      class="left-menu col-2 ps-0 pe-0"
+      (selectedGame)="onSelectedGame($event)"
+    />
+
+    <div class="col">
+      @let game = selectedGame;
+      <h2 class="text-center fw-bold position-sticky">
+        {{ game?.name }}
+      </h2>
+      <div class="game-table">
+        <app-game-details [selectedGame]="game" />
+        <app-copies-details [selectedGame]="game" />
+      </div>
+    </div>
+  </div>
+</div>

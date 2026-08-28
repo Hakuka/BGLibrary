@@ -6,10 +6,25 @@
   /* primary-color is also border field color */
   --primary-color: #256e99;
   --secondary-color: color-mix(in srgb, var(--primary-color), white 40%);
-  --backdrop: rgba(99, 99, 99, 0.8);
   --field-edit: #e1e7ef;
   --field-lock: color-mix(in srgb, var(--field-edit) 60%, var(--primary-color));
+}
 
-  /* size */
-  --max-height-all: calc(100vh - 50px);
+app-control .form-control,
+app-control .form-select {
+  background-color: var(--field-edit);
+  border: 1px solid var(--primary-color);
+}
+
+app-control .form-select:focus,
+app-control .form-control:focus {
+  box-shadow: 0 0 0 1px var(--select-color);
+}
+
+app-control .form-select:disabled {
+  background-color: var(--field-lock);
+}
+
+app-control .input-group-text {
+  background-color: var(--field-lock);
 }

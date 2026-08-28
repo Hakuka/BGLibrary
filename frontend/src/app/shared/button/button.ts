@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 type ButtonType = 'button' | 'submit';
 type Variant = 'primary' | 'secondary';
 @Component({
-  selector: 'button[appButton]',
+  selector: 'button[app-button]',
   imports: [],
   templateUrl: './button.html',
   styleUrl: './button.css',

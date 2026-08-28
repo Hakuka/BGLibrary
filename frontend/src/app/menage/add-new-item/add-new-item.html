@@ -1,19 +1,21 @@
-<modal>
+<app-modal
+  [label]="addTypeDisplay === 'C' ? 'Add copy' : 'Add game'"
+  (dismissed)="onCancel()"
+>
   <form #f="ngForm" (ngSubmit)="onSubmit()" class="modal-card">
-    <!-- Add new copy -->
-    @if (addTypeDisplay === 'C'){
+    @if (addTypeDisplay === 'C') {
     <h2>Add Copy</h2>
 
-    <control label="Game" forId="Game" [required]="true">
+    <app-control label="Game" forId="Game" [required]="true">
       <select id="Game" name="Game" required [(ngModel)]="newCopy.gameId" class="form-select">
-        <option disabled selected value="">Select a game for which a copy will be added</option>
+        <option disabled value="">Select a game for which a copy will be added</option>
         @for (game of games; track game.id) {
         <option [value]="game.id">{{ game.name }}</option>
         }
       </select>
-    </control>
+    </app-control>
 
-    <control label="Copy ID" forId="copyId" [required]="true">
+    <app-control label="Copy ID" forId="copyId" [required]="true">
       <input
         id="copyId"
         name="copyId"
@@ -23,24 +25,25 @@
         placeholder="e.g. c3"
         class="form-control"
       />
-    </control>
+    </app-control>
     @if (errorMessage) {
-    <small class="hint">{{ errorMessage }}</small>
+    <small class="hint" role="alert">{{ errorMessage }}</small>
     }
 
-    <control label="Weight" forId="weight" [required]="true">
+    <app-control label="Weight" forId="weight" [required]="true">
       <input
         id="weight"
         name="weight"
         type="number"
+        step="0.01"
         [(ngModel)]="newCopy.weight"
         required
         placeholder="e.g. 3"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Comment" forId="copyComment" [required]="false">
+    <app-control label="Comment" forId="copyComment" [required]="false">
       <textarea
         id="copyComment"
         name="copyComment"
@@ -48,15 +51,12 @@
         rows="3"
         placeholder="Used copy, tiles slightly scratched."
         class="form-control"
-      >
-      </textarea>
-    </control>
-
-    <!-- Add new game -->
+      ></textarea>
+    </app-control>
     } @else if (addTypeDisplay === 'G') {
     <h2>Add Game</h2>
 
-    <control label="Game" forId="GameName" [required]="true">
+    <app-control label="Game" forId="GameName" [required]="true">
       <input
         id="GameName"
         name="GameName"
@@ -66,9 +66,9 @@
         placeholder="e.g. The long story of burnout"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Game ID" forId="gameId" [required]="true">
+    <app-control label="Game ID" forId="gameId" [required]="true">
       <input
         id="gameId"
         name="gameId"
@@ -78,25 +78,24 @@
         placeholder="e.g. g3"
         class="form-control"
       />
-    </control>
+    </app-control>
 
     @if (errorMessage) {
-    <small class="hint">{{ errorMessage }}</small>
+    <small class="hint" role="alert">{{ errorMessage }}</small>
     }
 
-    <control label="Short description" forId="shortDescription" [required]="false">
+    <app-control label="Short description" forId="gameShortDescription" [required]="false">
       <input
         id="gameShortDescription"
         name="gameShortDescription"
         type="text"
-        rows="2"
         [(ngModel)]="newGame.shortDescription"
         placeholder="Easy and fast game"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Number of players" forId="gameNumberOfPlayers" [required]="true">
+    <app-control label="Number of players" forId="gameNumberOfPlayers" [required]="true">
       <input
         id="gameNumberOfPlayers"
         name="gameNumberOfPlayers"
@@ -106,9 +105,9 @@
         placeholder="e.g. 2-5"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Playing time" forId="gamePlayingTime" [required]="true">
+    <app-control label="Playing time" forId="gamePlayingTime" [required]="true">
       <input
         id="gamePlayingTime"
         name="gamePlayingTime"
@@ -118,9 +117,9 @@
         placeholder="e.g. 2-5"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Min age" forId="gameMinAge" [required]="true">
+    <app-control label="Min age" forId="gameMinAge" [required]="true">
       <input
         id="gameMinAge"
         name="gameMinAge"
@@ -130,21 +129,22 @@
         placeholder="e.g. 11"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Weight" forId="gameWeight" [required]="true">
+    <app-control label="Weight" forId="gameWeight" [required]="true">
       <input
         id="gameWeight"
         name="gameWeight"
         type="number"
+        step="0.01"
         required
         [(ngModel)]="newGame.weight"
-        placeholder="e.g. 11"
+        placeholder="e.g. 3"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Designer" forId="gameDesigner" [required]="true">
+    <app-control label="Designer" forId="gameDesigner" [required]="true">
       <input
         id="gameDesigner"
         name="gameDesigner"
@@ -154,9 +154,9 @@
         placeholder="e.g. John Game Changer"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Artist" forId="gameArtist" [required]="true">
+    <app-control label="Artist" forId="gameArtist" [required]="true">
       <input
         id="gameArtist"
         name="gameArtist"
@@ -166,9 +166,9 @@
         placeholder="e.g. Borys Art Maker"
         class="form-control"
       />
-    </control>
+    </app-control>
 
-    <control label="Comment" forId="gameComment" [required]="false">
+    <app-control label="Comment" forId="gameComment" [required]="false">
       <textarea
         id="gameComment"
         name="gameComment"
@@ -176,16 +176,15 @@
         rows="3"
         placeholder="Used copy, tiles slightly scratched."
         class="form-control"
-      >
-      </textarea>
-    </control>
-
+      ></textarea>
+    </app-control>
     }
-    <button-group>
-      <button appButton buttonType="button" variant="secondary" (buttonClick)="onCancel()">
+
+    <app-button-group>
+      <button app-button buttonType="button" variant="secondary" (buttonClick)="onCancel()">
         Cancel
       </button>
-      <button appButton buttonType="submit" variant="primary" [disabled]="f.invalid">Add</button>
-    </button-group>
-  </form> </modal
->>
+      <button app-button buttonType="submit" variant="primary" [disabled]="f.invalid">Add</button>
+    </app-button-group>
+  </form>
+</app-modal>

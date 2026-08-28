@@ -1,31 +1,27 @@
-﻿<header-menu (select)="onSelectMenu($event)" />
+<app-header-menu (menuSelected)="selectedMenuOption = $event" />
 <main>
-  @if (selectedMenuOption === "menu1") {
-  <div class="container-fluid">
-    <div class="row">
-      <!-- left menu -->
-      <games-menu class="left-menu col-2 ps-0 pe-0" (selectedGame)="onSelectedGame($event)" />
-      <!-- selected game -->
-      <div class="col">
-        <h2 class="text-center fw-bold position-sticky">
-          {{ currentGame?.name }}
-        </h2>
-        <div class="game-table">
-          <game-details [selectedGame]="currentGame" />
-          <copies-details [selectedGame]="currentGame" />
-        </div>
+  @switch (selectedMenuOption) {
+    @case ("menu1") {
+      @defer (on immediate) {
+        <app-games-view />
+      }
+    }
+    @case ("menu2") {
+      @defer (on immediate) {
+        <app-borrowed-view />
+      }
+    }
+    @case ("menu3") {
+      @defer (on immediate) {
+        <app-menage />
+      }
+    }
+    @default {
+      <div id="fallback">
+        <p>Welcome, select an option at the top to get started :)</p>
+        <p>Current state of project:</p>
+        <p><img src="assets/meme1.jpg" alt="meme1" /></p>
       </div>
-    </div>
-  </div>
-  } @else if (selectedMenuOption === "menu2") {
-  <borrowed-view />
-  } @else if (selectedMenuOption === "menu3") {
-  <menage />
-  }@else {
-  <div id="fallback">
-    <p>Welcome, select an option at the top to get started :)</p>
-    <p class="text-center">Current state of project:</p>
-    <p class="text-center"><img src="assets/meme1.jpg" alt="meme1" /></p>
-  </div>
+    }
   }
 </main>

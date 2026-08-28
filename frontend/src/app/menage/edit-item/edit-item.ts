@@ -9,13 +9,13 @@ import { Game } from '../../shared/models/game.model';
 import { CopiesService } from '../../shared/services/copies.service';
 import { GamesService } from '../../shared/services/games.service';
 @Component({
-  selector: 'edit-item',
+  selector: 'app-edit-item',
   imports: [FormsModule, ModalComponent, ControlComponent, ButtonComponent, ButtonGroup],
   templateUrl: './edit-item.html',
   styleUrl: './edit-item.css',
 })
 export class EditItemComponent {
-  @Output() close = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
   @Input({ required: true }) editTypeDisplay!: string;
   private gamesService = inject(GamesService);
   private copiesService = inject(CopiesService);
@@ -50,21 +50,28 @@ export class EditItemComponent {
     weight: undefined,
   };
 
-  onCancel() {
-    this.close.emit();
+  onCancel(): void {
+    this.closed.emit();
   }
-  onCopySelect(copyId: string) {
+  onCopySelect(copyId: string): void {
     this.updateCopy = { ...this.copiesService.getCopyInfo(copyId) };
   }
-  onGameSelect(gameId: string) {
+  onGameSelect(gameId: string): void {
     this.updateGame = { ...this.gamesService.getGameInfo(gameId) };
   }
-  onSubmit() {
+  onSubmit(): void {
     if (this.editTypeDisplay === 'C') {
+      if (this.updateCopy.weight == null) {
+        return;
+      }
       this.copiesService.updateCopy(this.updateCopy);
     } else if (this.editTypeDisplay === 'G') {
-      this.gamesService.updateGame(this.updateGame);
+      this.gamesService.updateGame({
+        ...this.updateGame,
+        minAge: this.updateGame.minAge ?? undefined,
+        weight: this.updateGame.weight ?? undefined,
+      });
     }
-    this.close.emit();
+    this.closed.emit();
   }
 }
